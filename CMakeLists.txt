@@ -3,4 +3,4 @@ project(FirstMilestone)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(FirstMilestone main.cpp)
+add_executable(FirstMilestone main.cpp Lexer.cpp Lexer.h Command.cpp Command.h DefineVarCommand.cpp DefineVarCommand.h)
