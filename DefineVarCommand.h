@@ -1,0 +1,12 @@
+//
+// Created by roei on 16/12/2019.
+//
+
+#ifndef FIRSTMILESTONE__DEFINEVARCOMMAND_H_
+#define FIRSTMILESTONE__DEFINEVARCOMMAND_H_
+
+class DefineVarCommand {
+
+};
+
+#endif //FIRSTMILESTONE__DEFINEVARCOMMAND_H_
