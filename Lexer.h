@@ -5,8 +5,25 @@
 #ifndef FIRSTMILESTONE__LEXER_H_
 #define FIRSTMILESTONE__LEXER_H_
 
-class Lexer {
+#include <stdio.h>
+#include <string>
+#include <vector>
+#include <map>
+#include <unordered_map>
+#include <iostream>
+#include <list>
+#include <fstream>
+#include <functional>
 
+using namespace std;
+
+class Lexer {
+  public:
+    Lexer(string);
+    vector<string> Lexing();
+
+  private:
+    string fileName;
 };
 
 #endif //FIRSTMILESTONE__LEXER_H_
