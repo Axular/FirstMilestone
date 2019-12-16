@@ -19,11 +19,12 @@ using namespace std;
 
 class Lexer {
   public:
-    Lexer(string);
+    explicit Lexer(string);
     vector<string> Lexing();
 
   private:
     string fileName;
+    int x;
 };
 
 #endif //FIRSTMILESTONE__LEXER_H_
