@@ -6,8 +6,7 @@
 #define FIRSTMILESTONE__LEXER_H_
 
 class Lexer {
-  public:
-    Lexer()
+
 };
 
 #endif //FIRSTMILESTONE__LEXER_H_
