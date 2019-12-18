@@ -3,4 +3,5 @@ project(FirstMilestone)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(FirstMilestone main.cpp Lexer.cpp Lexer.h Command.cpp Command.h DefineVarCommand.cpp DefineVarCommand.h)
+add_executable(FirstMilestone main.cpp Lexer.cpp Lexer.h Command.cpp Command.h DefineVarCommand.cpp DefineVarCommand.h Var.cpp Var.h VariablesSymbolTable.cpp VariablesSymbolTable.h)
+SET(CMAKE_CXX_FLAGS -pthread)
