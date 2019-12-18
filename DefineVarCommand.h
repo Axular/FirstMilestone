@@ -5,8 +5,11 @@
 #ifndef FIRSTMILESTONE__DEFINEVARCOMMAND_H_
 #define FIRSTMILESTONE__DEFINEVARCOMMAND_H_
 
-class DefineVarCommand {
+#include "Command.h"
 
+class DefineVarCommand : public Command {
+  public:
+    int execute();
 };
 
 #endif //FIRSTMILESTONE__DEFINEVARCOMMAND_H_
