@@ -43,9 +43,11 @@ int main(int argc, char *argv[]) {
     //v.push_back("5000");
     //sleeper.execute(v);
 
-    //vector<string> v;
-    //v.push_back("5000");
-    //v.push_back("5000");
-    //PrintCommand printer = PrintCommand();
-    //printer.execute(v);
+    vector<string> v;
+    v.push_back("5000");
+    v.push_back("5000");
+    PrintCommand printer = PrintCommand();
+    printer.execute(v);
+
+    //VariablesSymbolTable::getInstance().variablesMap;
 }

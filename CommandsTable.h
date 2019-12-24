@@ -19,6 +19,7 @@ private:
 
 public:
     static CommandsTable &getInstance();
+    int x;
 
     //by doing "=delete" we make sure we won't get copies of our commands table accidentally.
     CommandsTable(CommandsTable const &) = delete;

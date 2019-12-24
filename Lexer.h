@@ -4,7 +4,6 @@
 
 #ifndef FIRSTMILESTONE__LEXER_H_
 #define FIRSTMILESTONE__LEXER_H_
-
 #include <stdio.h>
 #include <string>
 #include <vector>
