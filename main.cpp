@@ -8,8 +8,8 @@
 #include "SleepCommand.h"
 #include "PrintCommand.h"
 
-
 int main(int argc, char *argv[]) {
+
     Lexer *l = new Lexer(argv[argc-1]);
     l->Lexing();
    //OpenServerCommand c = OpenServerCommand();
