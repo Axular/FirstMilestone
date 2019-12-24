@@ -27,6 +27,10 @@ Var VariablesSymbolTable::getVariable(string varName) {
     mutex_lock.unlock();
 }
 
+/*
+ * Inserts vars to symbol table
+ * If var already exist - updates it's value
+ * */
 void VariablesSymbolTable::insertVariable(Var var) {
     mutex_lock.lock();
     auto iterator = this->variablesMap.find(var.getName());
@@ -34,6 +38,22 @@ void VariablesSymbolTable::insertVariable(Var var) {
         this->variablesMap.insert(pair<string, Var>(var.getName(), var));
     } else {
         iterator->second.update(var.getValue());
+    }
+    mutex_lock.unlock();
+}
+
+
+/*
+ * This method updates variable's value
+ * currently supports regular variables only (value is type of double)
+ * */
+void VariablesSymbolTable::updateVarValue(string name, double value) {
+    mutex_lock.lock();
+    auto iterator = this->variablesMap.find(name);
+    if (iterator != this->variablesMap.end()) {
+        iterator->second.update(value);//todo: add value.calculate() (shunting yard)
+    } else {
+        throw "ERROR: tries to update variable value of var which not exist!";
     }
     mutex_lock.unlock();
 }
