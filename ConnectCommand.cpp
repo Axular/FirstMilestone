@@ -14,15 +14,15 @@ int ConnectCommand::execute(vector<string> v) {
     }
     //convert string to char*
     int length = v[0].length();
-    char c[length+1];
-    strcpy(c, v[0].c_str());
+    char ip[length+1];
+    strcpy(ip, v[0].c_str());
     //fix port to the right type
-    int a = stoi(v[1]);
-    //we create sockaddr oj to hold address of server
+    int port = stoi(v[1]);
+    //we create sockaddr obj to hold address of server
     sockaddr_in address; //means IP4
     address.sin_family = AF_INET;// IP4
-    address.sin_addr.s_addr = inet_addr(c); // the IP address we get as argument
-    address.sin_port = htons(a);
+    address.sin_addr.s_addr = inet_addr(ip); // the IP address we get as argument
+    address.sin_port = htons(port);
 
 
     //requesting a connection with the server on local
