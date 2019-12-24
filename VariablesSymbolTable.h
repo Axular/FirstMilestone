@@ -7,7 +7,6 @@
 
 # include "unordered_map"
 #include "Var.h"
-
 using namespace std;
 
 /*
@@ -17,14 +16,13 @@ class to contain all variablesMap of the program
  this implementation Guaranteed to be thread safe and without memory leaks.
 */
 class VariablesSymbolTable {
-private:
 
+private:
     VariablesSymbolTable() = default;
 
+    unordered_map<string, Var> variablesMap;
 
 public:
-    //todo: here only for testing - move back to be private
-    unordered_map<string, Var> variablesMap;
 
     static VariablesSymbolTable &getInstance();
 
