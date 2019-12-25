@@ -24,7 +24,7 @@ int UpdateVarCommand::execute(vector<string> executionCode) {
     //(we weren't asked to cover any other cases)
 
     if(assignmentOperator == "=") {
-        updateVarValue(name, stoi(value)); //todo: remove stoi which is not correct!! change to
+        VariablesSymbolTable::getInstance().updateVarValue(name, stoi(value)); //todo: remove stoi which is not correct!! change to
                                                 //todo: value.calculate() (shunting yard)
     } else {
         throw "Undefined case, tried to update variable and no '=' operator was detected";

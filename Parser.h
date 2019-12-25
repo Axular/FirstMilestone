@@ -10,11 +10,11 @@
 using namespace std;
 
 class Parser {
-public:
+  public:
     Parser();
     void parsing(vector<string>);
 
-private:
+  private:
     vector<string> getToEOL(vector<string>, int i);
 };
 
