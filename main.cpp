@@ -7,9 +7,12 @@
 #include "ConnectCommand.h"
 #include "SleepCommand.h"
 #include "PrintCommand.h"
+#include "CommandsTable.h"
 
 
 int main(int argc, char *argv[]) {
+
+
     Lexer *l = new Lexer(argv[argc-1]);
     l->Lexing();
    //OpenServerCommand c = OpenServerCommand();
@@ -49,3 +52,8 @@ int main(int argc, char *argv[]) {
     //PrintCommand printer = PrintCommand();
     //printer.execute(v);
 }
+
+
+
+//todo: VALGRIND
+//todo: CommandsTable destructor

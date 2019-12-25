@@ -13,8 +13,8 @@ class UpdateVarCommand : public  Command{
 protected:
     int execute(vector<string> executionCode) override;
 
+public:
     void updateVarValue(string name, double value);
-
 
 };
 

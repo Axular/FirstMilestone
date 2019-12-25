@@ -3,22 +3,60 @@
 //
 
 #include "CommandsTable.h"
+#include "unordered_map"
+#include "OpenServerCommand.h"
+#include "ConnectCommand.h"
+#include "DefineVarCommand.h"
+#include "PrintCommand.h"
+#include "SleepCommand.h"
+//#include "WhileLoopCommand.h"
+#include "UpdateVarCommand.h"
+
 #include <mutex>
+using namespace std;
+CommandsTable *CommandsTable::instance = 0;
+CommandsTable* instance;
+//std::mutex mutex_lock2;
 
-std::mutex mutex_lock;
 
-CommandsTable &CommandsTable::getInstance() {
-    static CommandsTable instance;
-    return instance;
+ CommandsTable* CommandsTable::getInstance() {
+    if (!instance)
+    {
+        instance = new CommandsTable();
+        instance->fillCommandsTable();
+    }
+        return instance;
+
 }
 
-Command CommandsTable::getCommand(string commandName) {
-    mutex_lock.lock(); //todo: may cause a bug? (not sure if mutex is needed here)
+CommandsTable::CommandsTable() {}
+
+Command* CommandsTable::getCommand(string commandName) {
+   // mutex_lock2.lock(); //todo: may cause a bug? (not sure if mutex is needed here)
     auto iterator = this->commandsMap.find(commandName);
     if (iterator == this->commandsMap.end()) {
-        throw "ERROR: command not found in commands map!";
+        cout << "ERROR: command not found in commands map!";
     } else {
         return iterator->second;
     }
-    mutex_lock.unlock();
+  //  mutex_lock2.unlock();
 }
+
+void CommandsTable::fillCommandsTable() {
+//    Note: this function is called if and only if an instance was instantiated, therefore I
+//    can use the instance and the commands map.
+
+    instance->commandsMap["openDataServer"] = new OpenServerCommand();
+    instance->commandsMap["connectControlClient"] = new ConnectCommand();
+    instance->commandsMap["var"] = new DefineVarCommand();
+    instance->commandsMap["Print"] = new PrintCommand();
+    instance->commandsMap["Sleep"] = new SleepCommand();
+    //instance->commandsMap["while"] = new WhileLoopCommand();// todo: update after update
+    instance->commandsMap["updateVarCommand"] = new UpdateVarCommand();
+
+
+};
+
+//}
+
+

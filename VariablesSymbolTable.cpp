@@ -20,7 +20,7 @@ Var VariablesSymbolTable::getVariable(string varName) {
     auto iterator = this->variablesMap.find(varName);
     if (iterator == this->variablesMap.end()) {
         //todo: what should we do if we search a var that not exist?
-        std::cout << "not found";
+        std::cout << "ERROR: not found";
     } else {
         return iterator->second;
     }

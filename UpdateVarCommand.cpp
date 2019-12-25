@@ -5,9 +5,6 @@
 #include "UpdateVarCommand.h"
 #include "VariablesSymbolTable.h"
 
-
-}
-
 int UpdateVarCommand::execute(vector<string> executionCode) {
 
     /*this function made for cases where var was already defined but now the program wants to update it's
@@ -33,7 +30,8 @@ int UpdateVarCommand::execute(vector<string> executionCode) {
         throw "Undefined case, tried to update variable and no '=' operator was detected";
     }
 
-    void updateVarValue(string name, double value){
-        VariablesSymbolTable::updateVarValue(name,value);
-    }
+}
+
+void UpdateVarCommand::updateVarValue(string name, double value){
+    VariablesSymbolTable::getInstance().updateVarValue(name,value);
 }

@@ -35,7 +35,7 @@ public:
 
     void insertVariable(Var var);
 
-    void updateVarValue(string name, double value);
+     void updateVarValue(string name, double value);
 
 };
 

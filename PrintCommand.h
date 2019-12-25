@@ -6,9 +6,10 @@
 #define FIRSTMILESTONE__PRINTCOMMAND_H_
 #include <string>
 #include <vector>
+#include "Command.h"
 
 using namespace std;
-class PrintCommand {
+class PrintCommand : public Command{
   public:
     int execute(vector<string>);
 
