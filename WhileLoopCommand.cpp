@@ -2,9 +2,41 @@
 // Created by roei on 24/12/2019.
 //
 
-#include "ConditionParser.h"
+#include "WhileLoopCommand.h"
 #include "globals.h"
-bool ConditionParser::conditionCheck(vector<string> conditionInfo) {
+int WhileLoopCommand::execute(vector<string> loopCondition) {
+    vector<string> conditionInfo;
+    vector<string> scopeInfo;
+    int flag = ScopeDidntStarted;
+    //find first { index - should me in 4th place
+    //and condition string put in new vec
+    // todo delete this if other loop works fine
+    //for( int i = 0 ; !loopCondition[i].compare("{") ; i++) {
+    //    conditionInfo.push_back(loopCondition[i]);
+    //}
+    //getting in scope strings operations.
+    for(string s : loopCondition) {
+        if (!s.compare("{")) {
+            flag = ScopeStarted;
+            continue;
+        }
+        if (!s.compare("}")) {
+            flag = ScopeEnded;
+            break;
+        }
+        if (flag == ScopeStarted) {
+            scopeInfo.push_back(s);
+        }
+        if (flag == ScopeDidntStarted) {
+            conditionInfo.push_back(s);
+        }
+    }
+        //running the loop
+    while(conditionCheck(conditionInfo)) {
+        //here we parse
+    }
+}
+/*bool WhileLoopCommand::conditionCheck(vector<string> conditionInfo) {
     Expression* e1 = nullptr;
     Expression* e2 = nullptr;
     double leftValue;
@@ -65,4 +97,5 @@ bool ConditionParser::conditionCheck(vector<string> conditionInfo) {
         }
     } else {
         throw "Wrong operator";
-    }}
+    }
+}*/

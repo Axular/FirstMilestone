@@ -10,6 +10,7 @@
 #include "ex1.h"
 #include "UPlus.h"
 #include "UMinus.h"
+#include "Minus.h"
 #include "Value.h"
 #include "Plus.h"
 #include "Mul.h"

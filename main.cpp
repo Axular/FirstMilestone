@@ -7,11 +7,16 @@
 #include "ConnectCommand.h"
 #include "SleepCommand.h"
 #include "PrintCommand.h"
+#include "ex1.h"
+#include "globals.h"
+#include "test.h"
+#include "WhileLoopCommand.h"
 
 int main(int argc, char *argv[]) {
 
-    Lexer *l = new Lexer(argv[argc-1]);
-    l->Lexing();
+
+    //Lexer *l = new Lexer(argv[argc-1]);
+    //l->Lexing();
    //OpenServerCommand c = OpenServerCommand();
     //vector<string> v;
     //string s = "5400";
@@ -43,11 +48,39 @@ int main(int argc, char *argv[]) {
     //v.push_back("5000");
     //sleeper.execute(v);
 
-    vector<string> v;
-    v.push_back("5000");
-    v.push_back("5000");
-    PrintCommand printer = PrintCommand();
-    printer.execute(v);
+   // vector<string> v;
+   // v.push_back("5000");
+   // v.push_back("5000");
+   // PrintCommand printer = PrintCommand();
+   // printer.execute(v);
+    //Expression* e = nullptr;
+//
+    Expression* e7 = nullptr;
+    try {
+        // 7
+        globalInterpreter->setVariables("x=1.5;y=8.5");
+        //delete globalInterpreter;
+    } catch (const char* e) {
+        if (e7 != nullptr) {
+            delete e7;
+        }
+        if (globalInterpreter != nullptr) {
+            delete globalInterpreter;
+        }
+        std::cout << e << std::endl;
+    }
+    test* t = new test;
+    t->test1();
+
+    vector<string> loopVec;
+    loopVec.push_back("x");
+    loopVec.push_back(">");
+    loopVec.push_back("y");
+    loopVec.push_back("{");
+    loopVec.push_back("do nothing.");
+    loopVec.push_back("}");
+    WhileLoopCommand().execute(loopVec);
+
 
     //VariablesSymbolTable::getInstance().variablesMap;
 }
