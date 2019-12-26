@@ -17,13 +17,14 @@
 int main(int argc, char *argv[]) {
 
 
-    //Lexer *l = new Lexer(argv[argc-1]);
-    //l->Lexing();
-   //OpenServerCommand c = OpenServerCommand();
-    //vector<string> v;
-    //string s = "5400";
-    //v.push_back(s);
-    //c.execute(v);
+    Lexer *l = new Lexer(argv[argc-1]);
+    l->Lexing();
+    OpenServerCommand c = OpenServerCommand();
+    vector<string> v;
+    string s = "5400";
+    v.push_back(s);
+    //thread threadServer(OpenServerCommand().execute(v));
+    c.execute(v);
 //
     //Lexer* L = new Lexer(argv[0]);
 //
@@ -35,15 +36,15 @@ int main(int argc, char *argv[]) {
 //
     //cout <<"testing";
    ////c.execute(v);
-    //
-    //vector<string> t;
-    //s = "127.0.0.1";
-    //t.push_back(s);
-    //s="5402";
-    //t.push_back(s);
-//
-    //ConnectCommand connect = ConnectCommand();
-    //connect.execute(t);
+
+    vector<string> t;
+    s = "127.0.0.1";
+    t.push_back(s);
+    s="5402";
+    t.push_back(s);
+
+    ConnectCommand connect = ConnectCommand();
+    connect.execute(t);
 
     //SleepCommand sleeper = SleepCommand();
     //vector<string> v;
@@ -57,31 +58,31 @@ int main(int argc, char *argv[]) {
    // printer.execute(v);
     //Expression* e = nullptr;
 //
-    Expression* e7 = nullptr;
-    try {
-        // 7
-        globalInterpreter->setVariables("x=1.5;y=8.5");
-        //delete globalInterpreter;
-    } catch (const char* e) {
-        if (e7 != nullptr) {
-            delete e7;
-        }
-        if (globalInterpreter != nullptr) {
-            delete globalInterpreter;
-        }
-        std::cout << e << std::endl;
-    }
-    test* t = new test;
-    t->test1();
+    //Expression* e7 = nullptr;
+    //try {
+    //    // 7
+    //    globalInterpreter->setVariables("x=1.5;y=8.5");
+    //    //delete globalInterpreter;
+    //} catch (const char* e) {
+    //    if (e7 != nullptr) {
+    //        delete e7;
+    //    }
+    //    if (globalInterpreter != nullptr) {
+    //        delete globalInterpreter;
+    //    }
+    //    std::cout << e << std::endl;
+    //}
+    //test* t = new test;
+    //t->test1();
 
-    vector<string> loopVec;
-    loopVec.push_back("x");
-    loopVec.push_back(">");
-    loopVec.push_back("y");
-    loopVec.push_back("{");
-    loopVec.push_back("do nothing.");
-    loopVec.push_back("}");
-    WhileLoopCommand().execute(loopVec);
+    //vector<string> loopVec;
+    //loopVec.push_back("x");
+    //loopVec.push_back(">");
+    //loopVec.push_back("y");
+    //loopVec.push_back("{");
+    //loopVec.push_back("do nothing.");
+    //loopVec.push_back("}");
+    //WhileLoopCommand().execute(loopVec);
 
 
     //VariablesSymbolTable::getInstance().variablesMap;

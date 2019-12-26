@@ -28,6 +28,8 @@ using namespace std;
 class OpenServerCommand :public  Command {
   public:
     int execute(vector<string>);
+  private:
+    static void receiveData(int);
 };
 
 #endif //FIRSTMILESTONE__OPENSERVERCOMMAND_H_

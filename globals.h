@@ -6,6 +6,7 @@
 #define FIRSTMILESTONE__GLOBALS_H_
 #include "Interpreter.h"
 extern Interpreter* globalInterpreter;
+extern bool keepRun;
 class globals {
 
 };

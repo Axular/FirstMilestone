@@ -6,3 +6,4 @@
 #include "globals.h"
 
 Interpreter* globalInterpreter = new Interpreter();
+bool keepRun = true;

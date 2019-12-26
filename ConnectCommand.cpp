@@ -3,8 +3,28 @@
 //
 
 #include "ConnectCommand.h"
+#include "Expression.h"
+#include "globals.h"
 int ConnectCommand::execute(vector<string> v) {
+    Expression* portExpression = nullptr;
+    int port;
 
+    try {
+        portExpression = globalInterpreter->interpret(v[1]);
+        std::cout << "Connect port as client: " << portExpression->calculate() << std::endl;
+        port = portExpression->calculate();
+        delete portExpression;
+        //delete globalInterpreter;
+    } catch (const char* e) {
+        if (portExpression != nullptr) {
+            delete portExpression;
+        }
+        if (globalInterpreter != nullptr) {
+            delete globalInterpreter;
+        }
+        std::cout << e << std::endl;
+    }
+    std::cout << port << std::endl;
     //create socket
     int clientSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (clientSocket == -1) {
@@ -17,7 +37,7 @@ int ConnectCommand::execute(vector<string> v) {
     char ip[length+1];
     strcpy(ip, v[0].c_str());
     //fix port to the right type
-    int port = stoi(v[1]);
+
     //we create sockaddr obj to hold address of server
     sockaddr_in address; //means IP4
     address.sin_family = AF_INET;// IP4

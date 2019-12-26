@@ -28,8 +28,9 @@ class Lexer {
     void addToVec(string, ifstream&);
     void varSplit(string);
     void spaceSplit(string);
-    void loopSplit(string, ifstream&);
+    void conditionSplit(string line, ifstream &reader);
     void parametersSplit(string);
+    void equalSplit(string);
 };
 
 #endif //FIRSTMILESTONE__LEXER_H_

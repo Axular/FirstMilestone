@@ -4,11 +4,32 @@
 
 #include <cstring>
 #include "OpenServerCommand.h"
-
+#include "Expression.h"
+#include "globals.h"
+#include <thread>
+#include <iostream>
 
 int OpenServerCommand::execute(vector<string> params) {
+    Expression* portExpression = nullptr;
+    int port;
 
-    const int PORT = stod(params.front());
+    try {
+        portExpression = globalInterpreter->interpret(params.front());
+        //std::cout << "Connect port as client: " << portExpression->calculate() << std::endl;
+        port = portExpression->calculate();
+        delete portExpression;
+        //delete globalInterpreter;
+    } catch (const char* e) {
+        if (portExpression != nullptr) {
+            delete portExpression;
+        }
+        if (globalInterpreter != nullptr) {
+            delete globalInterpreter;
+        }
+        std::cout << e << std::endl;
+    }
+    const int PORT = port;
+    std::cout << PORT << std::endl;
     //create socket
     int socketfd = socket(AF_INET, SOCK_STREAM, 0);
     if (socketfd == -1) {
@@ -16,7 +37,6 @@ int OpenServerCommand::execute(vector<string> params) {
         std::cerr << "Could not create a socket"<<std::endl;
         return -1;
     }
-    cout << INADDR_ANY ;
     //bind socket to IP address
     // we first need to create the sockaddr obj.
     sockaddr_in address; //in means IP4
@@ -59,9 +79,30 @@ int OpenServerCommand::execute(vector<string> params) {
     int valread = read( client_socket , buffer, 1024);
     std::cout<<buffer<<std::endl;
 
+    thread threadServer(receiveData, client_socket);
+    threadServer.detach();
+
     //writing back to client
     char *hello = "Hello, I can hear you! \n";
     send(client_socket , hello , strlen(hello) , 0 );
     std::cout<<"Hello message sent\n"<<std::endl;
+
+
+
     return 0;
 }
+
+void OpenServerCommand::receiveData(int client_socket) {
+    //reading from client
+    char buffer[1024] = {0};
+    int valread = read( client_socket , buffer, 1024);
+    std::cout<<buffer<<std::endl;
+    while(keepRun) {
+        cout << "we are in thread"<< endl;
+        valread = read( client_socket , buffer, 1024);
+        std::cout<<buffer<<std::endl;
+        sleep(1);
+    }
+}
+
+

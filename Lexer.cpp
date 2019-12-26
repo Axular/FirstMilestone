@@ -8,7 +8,7 @@
 
 vector<string> Lexer::Lexing() {
     string str;
-    //open a file reader pointer
+    //open a file reader pointerloopSplit
     ifstream reader(this->fileName);
     if(!reader || !reader.is_open()) {
         throw "Error in file reading";
@@ -30,11 +30,10 @@ void Lexer::addToVec(string line,ifstream &reader) {
     stringstream ss(line);
     if(regex_search(line, matchs, reg = ("var"))) {
         varSplit(line);
-    } else if (regex_search(line, matchs, reg = ("while"))) {
-        loopSplit(line, reader);
+    } else if (regex_search(line, matchs, reg = ("while")) || regex_search(line, matchs, reg = ("if")) ) {
+        conditionSplit(line, reader);
     }else if (regex_search(line, matchs, reg = ("="))) {
-        //spaceSplit(line);
-        spaceSplit(line);
+        equalSplit(line);
     } else {
         parametersSplit(line);
     }
@@ -74,7 +73,7 @@ void Lexer::spaceSplit(string line) {
     }
 }
 //function to handle loop string
-void Lexer::loopSplit(string line, ifstream & reader) {
+void Lexer::conditionSplit(string line, ifstream & reader) {
     string str;
     //first we insert first loop line.
     spaceSplit(line);
@@ -91,10 +90,11 @@ void Lexer::loopSplit(string line, ifstream & reader) {
             //check how to split the string , -1 means there is no '=' in the string
             int equal = str.find('=');
             if(equal != -1) {
-                spaceSplit(str);
+                equalSplit(str);
             } else {
                 parametersSplit(str);
             }
+            myVec.push_back("SEOL");
         }
     }
 }
@@ -108,7 +108,7 @@ void Lexer::parametersSplit(string str) {
     tok = str.substr(firstBrace+1, str.find(')')-firstBrace-1);
     stringstream ss(tok);
     string buffer;
-    //split by ',' if there is nonce just push one string
+    //split by ',' if there is none just push one string
     while(getline(ss, buffer, ',')) {
         if(buffer.find('\"') != -1) {
             //getting " places in string
@@ -119,4 +119,14 @@ void Lexer::parametersSplit(string str) {
         }
         myVec.push_back(buffer);
     }
+}
+void Lexer::equalSplit(string line) {
+    stringstream ss(line);
+    string buffer;
+    //split by '='
+    getline(ss, buffer, '=');
+    myVec.push_back(buffer);
+    myVec.push_back("=");
+    getline(ss, buffer, '=');
+    myVec.push_back(buffer);
 }
