@@ -18,7 +18,7 @@ vector<string> Lexer::Lexing() {
         //secondary function to handle each line
         addToVec(str, reader);
     }
-    return vector<string>();
+    return myVec;
 }
 //lexer constructor
 Lexer::Lexer(const string &file_name) : fileName(file_name) {}

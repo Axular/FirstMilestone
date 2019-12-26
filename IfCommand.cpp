@@ -3,7 +3,7 @@
 //
 
 #include "IfCommand.h"
-int IfCommand::execute(vector<string> ifConditionInfo) {
+void IfCommand::execute(vector<string> ifConditionInfo) {
     vector<string> conditionInfo;
     vector<string> scopeInfo;
     int flag = ScopeDidntStarted;

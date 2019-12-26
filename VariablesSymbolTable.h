@@ -7,6 +7,7 @@
 
 # include "unordered_map"
 #include "Var.h"
+#include "Command.h"
 
 using namespace std;
 
@@ -21,11 +22,12 @@ private:
 
     VariablesSymbolTable() = default;
 
-
-public:
     //todo: here only for testing - move back to be private
     unordered_map<string, Var> variablesMap;
 
+public:
+
+    unordered_map<string,Var> getVariablesMap();
     static VariablesSymbolTable &getInstance();
 
     //by doing "=delete" we make sure we won't get copies of our symbol table accidentally.

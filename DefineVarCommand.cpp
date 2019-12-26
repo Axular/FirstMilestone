@@ -9,7 +9,7 @@
 
 
 /*this function creates new var*/
-int DefineVarCommand::execute(vector<string> executionCode) {
+void DefineVarCommand::execute(vector<string> executionCode) {
 
 /*    when we define a var we know the locations are in this order: (0)name, (1)type, (2) value
  *    examples:

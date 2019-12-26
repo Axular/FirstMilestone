@@ -9,7 +9,7 @@
 #include <thread>
 #include <iostream>
 
-int OpenServerCommand::execute(vector<string> params) {
+void OpenServerCommand::execute(vector<string> params) {
     Expression* portExpression = nullptr;
     int port;
 
@@ -35,7 +35,8 @@ int OpenServerCommand::execute(vector<string> params) {
     if (socketfd == -1) {
         //error
         std::cerr << "Could not create a socket"<<std::endl;
-        return -1;
+        //return -1;
+        throw "-1";
     }
     //bind socket to IP address
     // we first need to create the sockaddr obj.
@@ -49,13 +50,15 @@ int OpenServerCommand::execute(vector<string> params) {
     //the actual bind command
     if (bind(socketfd, (struct sockaddr *) &address, sizeof(address)) == -1) {
         std::cerr<<"Could not bind the socket to an IP"<<std::endl;
-        return -2;
+        //return -2;
+        throw "-2";
     }
 
     //making socket listen to the port
     if (listen(socketfd, 5) == -1) { //can also set to SOMAXCON (max connections)
         std::cerr<<"Error during listening command"<<std::endl;
-        return -3;
+        //return -3;
+        throw "-3";
     } else{
         std::cout<<"Server is now listening ..."<<std::endl;
     }
@@ -69,7 +72,8 @@ int OpenServerCommand::execute(vector<string> params) {
 
     if (client_socket == -1) {
         std::cerr<<"Error accepting client"<<std::endl;
-        return -4;
+        //return -4;
+        throw "-4";
     }
 
     close(socketfd); //closing the listening socket
@@ -88,8 +92,6 @@ int OpenServerCommand::execute(vector<string> params) {
     std::cout<<"Hello message sent\n"<<std::endl;
 
 
-
-    return 0;
 }
 
 void OpenServerCommand::receiveData(int client_socket) {

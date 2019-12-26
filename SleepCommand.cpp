@@ -3,7 +3,7 @@
 //
 
 #include "SleepCommand.h"
-int SleepCommand::execute(vector<string> executionCode) {
+void SleepCommand::execute(vector<string> executionCode) {
     //convert string to int
     int time = stoi(executionCode[0]);
     //get current time before sleep/

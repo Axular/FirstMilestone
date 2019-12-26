@@ -14,7 +14,7 @@ using namespace std;
 
 class WhileLoopCommand : public ConditionParser{
   public:
-    int execute(vector<string>);
+    void execute(vector<string>);
 
 };
 

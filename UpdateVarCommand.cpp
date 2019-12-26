@@ -5,7 +5,7 @@
 #include "UpdateVarCommand.h"
 #include "VariablesSymbolTable.h"
 
-int UpdateVarCommand::execute(vector<string> executionCode) {
+void UpdateVarCommand::execute(vector<string> executionCode) {
 
     /*this function made for cases where var was already defined but now the program wants to update it's
      * value to be something else. value can be double but also can be another variable, examples:

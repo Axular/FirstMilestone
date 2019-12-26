@@ -5,7 +5,7 @@
 #include "ConnectCommand.h"
 #include "Expression.h"
 #include "globals.h"
-int ConnectCommand::execute(vector<string> v) {
+void ConnectCommand::execute(vector<string> v) {
     Expression* portExpression = nullptr;
     int port;
 
@@ -30,7 +30,8 @@ int ConnectCommand::execute(vector<string> v) {
     if (clientSocket == -1) {
         //error
         cerr << "Could not create a socket" << endl;
-        return -1;
+        throw "-1";
+        //return -1;
     }
     //convert string to char*
     int length = v[0].length();
@@ -50,7 +51,8 @@ int ConnectCommand::execute(vector<string> v) {
     int is_connect = connect(clientSocket, (struct sockaddr *) &address, sizeof(address));
     if (is_connect == -1) {
         cerr << "Could not connect to host server" << endl;
-        return  -2;
+        throw "-2";
+        //return  -2;
     } else {
         cout << "Client is now connected to server" << endl;
     }
@@ -71,5 +73,6 @@ int ConnectCommand::execute(vector<string> v) {
 
     close(clientSocket);
 
-    return 0;
+    throw "0";
+    //return 0;
 }

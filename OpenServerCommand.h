@@ -27,7 +27,7 @@ using namespace std;
 
 class OpenServerCommand :public  Command {
   public:
-    int execute(vector<string>);
+    void execute(vector<string>);
   private:
     static void receiveData(int);
 };

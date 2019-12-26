@@ -8,7 +8,7 @@
 #include "ConditionParser.h"
 class IfCommand : public ConditionParser{
   public:
-    int execute(vector<string>);
+    void execute(vector<string>);
 };
 
 #endif //FIRSTMILESTONE__IFCOMMAND_H_

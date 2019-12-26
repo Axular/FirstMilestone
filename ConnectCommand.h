@@ -21,7 +21,7 @@ using namespace std;
 class ConnectCommand : public Command {
 
   public:
-    int execute(vector<string>);
+    void execute(vector<string>);
 };
 
 #endif //FIRSTMILESTONE__CONNECTCOMMAND_H_

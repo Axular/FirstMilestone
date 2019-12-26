@@ -11,7 +11,7 @@
 using namespace std;
 class PrintCommand : public Command{
   public:
-    int execute(vector<string>);
+    void execute(vector<string>);
 
 };
 

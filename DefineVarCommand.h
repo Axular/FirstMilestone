@@ -9,7 +9,7 @@
 
 class DefineVarCommand : public Command {
 public:
-    int execute(vector<string> executionCode) override;
+    void execute(vector<string> executionCode) override;
 };
 
 #endif //FIRSTMILESTONE__DEFINEVARCOMMAND_H_

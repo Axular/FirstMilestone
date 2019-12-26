@@ -22,7 +22,7 @@ public:
 
     Command* getCommand(string commandName);
     static CommandsTable* getInstance();
-
+    unordered_map<string, Command*> getCommandsMap();
 };
 
 

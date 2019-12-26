@@ -4,7 +4,7 @@
 
 #include "WhileLoopCommand.h"
 #include "globals.h"
-int WhileLoopCommand::execute(vector<string> loopCondition) {
+void WhileLoopCommand::execute(vector<string> loopCondition) {
     vector<string> conditionInfo;
     vector<string> scopeInfo;
     int flag = ScopeDidntStarted;

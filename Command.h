@@ -11,9 +11,9 @@
 using namespace std;
 
 class Command {
-protected:
-    //execute gets as an input a vector which contains the execution code as separated words
-   virtual int execute(vector<string> executionCode) = 0;
+public:
+//execute gets as an input a vector which contains the execution code as separated words
+virtual void execute(vector<string> executionCode) = 0;
 };
 
 #endif //FIRSTMILESTONE__COMMAND_H_

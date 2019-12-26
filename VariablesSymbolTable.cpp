@@ -3,6 +3,7 @@
 //
 
 #include "VariablesSymbolTable.h"
+#include "Command.h"
 #include <mutex>
 
 std::mutex mutex_lock;
@@ -45,7 +46,7 @@ void VariablesSymbolTable::insertVariable(Var var) {
 
 /*
  * This method updates variable's value
- * currently supports regular variables only (value is type of double)
+ * currently supports variables with double value (and not support updating sim value)
  * */
 void VariablesSymbolTable::updateVarValue(string name, double value) {
     mutex_lock.lock();
@@ -56,4 +57,8 @@ void VariablesSymbolTable::updateVarValue(string name, double value) {
         throw "ERROR: tries to update variable value of var which not exist!";
     }
     mutex_lock.unlock();
+}
+
+unordered_map<string,Var> VariablesSymbolTable::getVariablesMap() {
+    return variablesMap;
 }

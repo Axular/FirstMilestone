@@ -11,5 +11,6 @@ add_executable(FirstMilestone main.cpp Lexer.cpp Lexer.h Command.cpp Command.h
         WhileLoopCommand.cpp WhileLoopCommand.h ex1.h ex1.cpp globals.cpp globals.h Interpreter.cpp Interpreter.h
         BinaryOperator.h BinaryOperator.cpp Var.cpp Var.h Value.cpp Value.cpp Minus.h Minus.cpp Plus.cpp
         Plus.h Div.cpp Div.h UMinus.cpp UMinus.h UPlus.cpp UPlus.h Variable.cpp Variable.h Mul.cpp Mul.h
-        UnaryOperator.cpp UnaryOperator.h test.cpp test.h IfCommand.cpp IfCommand.h)
+        UnaryOperator.cpp UnaryOperator.h test.cpp test.h IfCommand.cpp IfCommand.h
+        UnaryOperator.cpp UnaryOperator.h test.cpp test.h CommandsTable.h CommandsTable.cpp)
 SET(CMAKE_CXX_FLAGS -pthread)

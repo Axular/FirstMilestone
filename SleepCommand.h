@@ -12,7 +12,7 @@
 using namespace std;
 class SleepCommand : public Command{
   public :
-    int execute(vector<string>);
+    void execute(vector<string>);
     void goToSleep(string);
 };
 
