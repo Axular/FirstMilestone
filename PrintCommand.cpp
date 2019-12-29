@@ -5,9 +5,10 @@
 #include <iostream>
 #include "PrintCommand.h"
 #include "SleepCommand.h"
+#include "VariablesSymbolTable.h"
 void PrintCommand::execute(vector<string> executionCode) {
     //todo: remove me
-    cout << "parser testing";
+    //cout << "parser testing";
 
     //validation check: print msg if we have more the 2 string in vector
     if (executionCode.size() > 1) {
@@ -20,7 +21,12 @@ void PrintCommand::execute(vector<string> executionCode) {
 
     //printing all vector string - suppose to be one string usually.
     for(string s : executionCode) {
-        cout << s << endl;
+        if(VariablesSymbolTable::getInstance().getVariablesMap().find(s) !=
+            VariablesSymbolTable::getInstance().getVariablesMap().end()) {
+            cout << VariablesSymbolTable::getInstance().getVariablesMap()[s]->getValue() << endl;
+        }else {
+            cout << s << endl;
+        }
     }
 }
 

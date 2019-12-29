@@ -16,7 +16,7 @@ VariablesSymbolTable &VariablesSymbolTable::getInstance() {
         VariablesSymbolTable::simVarMap = simVarMapInitial();
     }
     if(indexSimMap.empty()) {
-        VariablesSymbolTable::indexSimMap;
+        VariablesSymbolTable::indexSimMap = indexSimMapInitial();
     }
     static VariablesSymbolTable instance;
     return instance;

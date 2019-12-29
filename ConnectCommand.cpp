@@ -11,9 +11,10 @@
 void ConnectCommand::execute(vector<string> v) {
     Expression* portExpression = nullptr;
     int port;
-
+    string ipAsString = v[0];
+    string portAsString = v[1];
     try {
-        portExpression = globalInterpreter->interpret(v[1]);
+        portExpression = globalInterpreter->interpret(portAsString);
         std::cout << "Connect port as client: " << portExpression->calculate() << std::endl;
         port = portExpression->calculate();
         delete portExpression;
@@ -38,15 +39,15 @@ void ConnectCommand::execute(vector<string> v) {
         //return -1;
     }
     //convert string to char*
-    int length = v[0].length();
+    int length = ipAsString.length();
     char ip[length+1];
-    strcpy(ip, v[0].c_str());
+    strcpy(ip, ipAsString.c_str());
     //fix port to the right type
 
     //we create sockaddr obj to hold sim of server
     sockaddr_in address; //means IP4
     address.sin_family = AF_INET;// IP4
-    address.sin_addr.s_addr = inet_addr(ip); // the IP address we get as argument
+    address.sin_addr.s_addr = inet_addr(ip); // the IP sim we get as argument
     address.sin_port = htons(port);
 
 
@@ -64,34 +65,36 @@ void ConnectCommand::execute(vector<string> v) {
     clientServer.detach();
 
     //if we get here we made a connection
-    sleep(1);
 
-    //char buffer[1024] = {0};
-    //int valread = read (clientSocket,buffer,1024);
-    //cout << buffer << endl;
 
-    //close(clientSocket);
-    //todo: remove me
-    //char h[] = "set controls/flight/rudder -1\r\n";
-//
-    //int is_sent = send(clientSocket, h , strlen(h), 0);
-    //if (is_sent == -1) {
-    //    cout << "Error sending msg" << endl;
-    //} else {
-    //    cout<< "Hello msg sent to server" <<endl;
-    //}
-    //throw "0";
-    //return 0;
+/*    char buffer[1024] = {0};
+    int valread = read (clientSocket,buffer,1024);
+    cout << buffer << endl;
+
+    close(clientSocket);
+    todo: remove me
+    char h[] = "set controls/flight/rudder -1\r\n";
+
+    int is_sent = send(clientSocket, h , strlen(h), 0);
+    if (is_sent == -1) {
+        cout << "Error sending msg" << endl;
+    } else {
+        cout<< "Hello msg sent to server" <<endl;
+    }
+    throw "0";
+    return 0;*/
 }
 void ConnectCommand::sendData(int clientSocket) {
-    char buffer[1024] = {0};
+    //char buffer[1024] = {0};
     string sim;
-    //todo
+
+
     while(keepRun) {
         for(auto pair : VariablesSymbolTable::getInstance().getVariablesMap()) {
             //check if this var already is not initial
-            if(pair.second->getType() == Var::VarType::OutputVar
-            && !isnan(pair.second->getValue())) {
+            if(pair.second->getType() == Var::VarType::OutputVar)
+            //&& !isnan(pair.second->getValue()) //todo: add to if statement if needed
+            {
                 //preparing the string for sending
                 sim = "set ";
                 sim.append(pair.second->getSim());
@@ -109,13 +112,13 @@ void ConnectCommand::sendData(int clientSocket) {
                 if (is_sent == -1) {
                     cout << "Error sending msg" << endl;
                 } else {
-                    cout<< pair.first << pair.second->getValue() <<endl;
+                    //cout<< pair.first << pair.second->getValue() <<endl;
                 }
             }
         }
         //cout << "we are in thread"<< endl;
         //todo check if need this
-        sleep(1);
+        //sleep(3);
     }
     close(clientSocket);
 }

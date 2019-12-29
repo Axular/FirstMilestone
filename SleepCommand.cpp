@@ -5,7 +5,7 @@
 #include "SleepCommand.h"
 void SleepCommand::execute(vector<string> executionCode) {
     //todo: remove me
-    cout << "parser testing";
+    //cout << "parser testing";
     //convert string to int
     int time = stoi(executionCode[0]);
     //get current time before sleep/
@@ -21,8 +21,8 @@ void SleepCommand::execute(vector<string> executionCode) {
     //calculate time difference
     std::chrono::duration<double> elapsed_seconds = end-start;
 
-    //print time difference
-    cout << elapsed_seconds.count()<< endl;
+    //todo : delete this print time difference
+    //cout << elapsed_seconds.count()<< endl;
 }
 void SleepCommand::goToSleep(string s) {
     vector<string> v;

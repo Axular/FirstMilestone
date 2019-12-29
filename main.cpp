@@ -17,7 +17,6 @@
 
 int main(int argc, char *argv[]) {
 
-
     Lexer *l = new Lexer(argv[argc-1]);
     Parser *p = new Parser();
     p->parse(l->Lexing(), "EOL");
@@ -100,7 +99,7 @@ int main(int argc, char *argv[]) {
 //======GENERAL=========
 //todo: read the exercise again and make sure we didn't forget anything.
 //todo: if some bugs occur check the commands maybe '/' at the beginning is not needed
-
+//remove spaces from sim = " /blabla"
 //====To Check==========
 //why ->calculate of double is not accurate (i.e 0.2 becomes 0.2000000000000001)
 // if command

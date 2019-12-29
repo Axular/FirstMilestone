@@ -9,7 +9,7 @@
 
 void UpdateVarCommand::execute(vector<string> executionCode) {
     //todo: remove me
-    cout << "parser testing";
+    //cout << "parser testing";
     /*this function made for cases where var was already defined but now the program wants to update it's
      * value to be something else. value can be double but also can be another variable, examples:
      * heading = 3; //value is double

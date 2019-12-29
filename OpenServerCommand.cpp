@@ -11,7 +11,7 @@
 #include <iostream>
 
 void OpenServerCommand::execute(vector<string> params) {
-   cout << "parser testing";
+   //cout << "parser testing";
     Expression* portExpression = nullptr;
     int port;
 
@@ -40,7 +40,7 @@ void OpenServerCommand::execute(vector<string> params) {
         //return -1;
         throw "-1";
     }
-    //bind socket to IP address
+    //bind socket to IP sim
     // we first need to create the sockaddr obj.
     sockaddr_in address; //in means IP4
     address.sin_family = AF_INET;
@@ -78,6 +78,7 @@ void OpenServerCommand::execute(vector<string> params) {
         throw "-4";
     }
 
+    //todo: may cause a bug(?)
     close(socketfd); //closing the listening socket
 
     thread threadServer(receiveData, client_socket);
@@ -96,17 +97,19 @@ void OpenServerCommand::execute(vector<string> params) {
 
 void OpenServerCommand::receiveData(int client_socket) {
     //initial local variables.
-    char buffer[1024] = {0};
+    char dataFromServer[1024] = {0};
     int valread;
     int index = 0;
     char* token;
     Var* tempVar = nullptr;
+
     while(keepRun) {
         index = 0;
         //get data from client.
-        valread = read( client_socket , buffer, 1024);
-        //std::cout<<buffer<<std::endl;
-        token = strtok(buffer , ",");
+        valread = read(client_socket , dataFromServer, 1024);
+        //std::cout<<dataFromServer<<std::endl;
+        token = strtok(dataFromServer , ",");
+
         while(token!=NULL) {
             //cout << token << endl;
             //check if the Var we get is not nullptr.
@@ -117,14 +120,15 @@ void OpenServerCommand::receiveData(int client_socket) {
                 if(tempVar->getType() == Var::VarType::InputVar) {
                     //update tempVar value.
                     tempVar->update(stod(token));
-                    cout << index << " : " << tempVar->getValue() << endl;
+                    //cout << index << " : " << tempVar->getValue() << endl;
                 }
             }
             token = strtok(NULL , ",");
             index += 1;
         }
         //todo check if need this
-        sleep(0.5);
+        //todo: check other constants
+        //sleep(3);
     }
 }
 

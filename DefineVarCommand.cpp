@@ -13,7 +13,7 @@
 /*this function creates new var*/
 void DefineVarCommand::execute(vector<string> executionCode) {
     //todo: remove me
-    cout << "parser testing";
+    //cout << "parser testing";
 /*    when we define a var we know the locations are in this order: (0)name, (1)type, (2) value
  *    examples:
  *    var starter -> sim("/controls/switches/starter")
@@ -33,8 +33,12 @@ void DefineVarCommand::execute(vector<string> executionCode) {
     //create new var:
     if (type == "->") {
         newVariable = new Var(name, Var::VarType::OutputVar, sim);
+        //updating sim to var map:
+        VariablesSymbolTable::getInstance().simVarMap[sim] = newVariable;
     } else if (type == "<-") {
         newVariable = new Var(name, Var::VarType::InputVar, sim);
+        //updating sim to var map:
+        VariablesSymbolTable::getInstance().simVarMap[sim] = newVariable;
     } else if (type == "=") {
         Expression* exp = nullptr;
         double value;
@@ -55,8 +59,7 @@ void DefineVarCommand::execute(vector<string> executionCode) {
 
     //add var to symbol table(NOTE: if var already exist, symbolTable will update it's value):
     VariablesSymbolTable::getInstance().insertVariable(newVariable);
-    //updating sim to var map:
-    VariablesSymbolTable::getInstance().simVarMap[sim] = newVariable;
+
 
 
 }
