@@ -12,9 +12,14 @@ bool ConditionParser::conditionCheck(vector<string> conditionInfo) {
 
 
     try {
-        e1 = globalInterpreter->interpret(conditionInfo[0]);
+        //added as patch cause interpret call below
+        //doesn't work with conditionInfo[0]
+        string tempCaster0 = conditionInfo[0];
+        string tempCaster2 = conditionInfo[2];
+
+        e1 = globalInterpreter->interpret(tempCaster0);
         leftValue = e1->calculate();
-        e2 = globalInterpreter->interpret(conditionInfo[2]);
+        e2 = globalInterpreter->interpret(tempCaster2);
         rightValue = e2->calculate();
     } catch (const char* e) {
         if (e1 != nullptr) {

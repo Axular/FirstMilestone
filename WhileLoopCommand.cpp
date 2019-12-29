@@ -4,10 +4,16 @@
 
 #include "WhileLoopCommand.h"
 #include "globals.h"
+#include "Parser.h"
+
 void WhileLoopCommand::execute(vector<string> loopCondition) {
+    //todo: remove me
+    cout << "parser testing";
     vector<string> conditionInfo;
     vector<string> scopeInfo;
     int flag = ScopeDidntStarted;
+    Parser *p = new Parser();
+
     //find first { index - should me in 4th place
     //and condition string put in new vec
     // todo delete this if other loop works fine
@@ -15,7 +21,7 @@ void WhileLoopCommand::execute(vector<string> loopCondition) {
     //    conditionInfo.push_back(loopCondition[i]);
     //}
     //getting in scope strings operations.
-    for(string s : loopCondition) {
+    for (string s : loopCondition) {
         if (!s.compare("{")) {
             flag = ScopeStarted;
             continue;
@@ -31,9 +37,9 @@ void WhileLoopCommand::execute(vector<string> loopCondition) {
             conditionInfo.push_back(s);
         }
     }
-        //running the loop
-    while(conditionCheck(conditionInfo)) {
-        //here we parse
+    //running the loop
+    while (conditionCheck(conditionInfo)) {
+        p->parse(scopeInfo, "SEOL");
     }
 }
 /*bool WhileLoopCommand::conditionCheck(vector<string> conditionInfo) {

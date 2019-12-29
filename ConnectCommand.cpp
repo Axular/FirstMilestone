@@ -6,6 +6,8 @@
 #include "Expression.h"
 #include "globals.h"
 void ConnectCommand::execute(vector<string> v) {
+    //todo: remove me
+    cout << "parser testing";
     Expression* portExpression = nullptr;
     int port;
 
@@ -62,6 +64,7 @@ void ConnectCommand::execute(vector<string> v) {
 
     //if we get here we made a connection
     sleep(1);
+    //todo: remove me
     const char h[] = "set controls/flight/rudder -1\r\n";
 
     int is_sent = send(clientSocket, h , strlen(h), 0);
@@ -76,7 +79,6 @@ void ConnectCommand::execute(vector<string> v) {
 
     close(clientSocket);
 
-    throw "0";
     //return 0;
 }
 void ConnectCommand::sendData(int clientSocket) {

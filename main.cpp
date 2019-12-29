@@ -17,9 +17,10 @@
 
 int main(int argc, char *argv[]) {
 
+
     Lexer *l = new Lexer(argv[argc-1]);
     Parser *p = new Parser();
-    p->parse(l->Lexing());
+    p->parse(l->Lexing(), "EOL");
 
     //Lexer *l = new Lexer(argv[argc-1]);
     //l->Lexing();
@@ -92,8 +93,13 @@ int main(int argc, char *argv[]) {
 }
 
 
+//======VALGRING========
 //todo: VALGRIND
 //todo: CommandsTable destructor
 
 //======GENERAL=========
 //todo: read the exercise again and make sure we didn't forget anything.
+//todo: if some bugs occur check the commands maybe '/' at the beginning is not needed
+
+//====To Check==========
+//why ->calculate of double is not accurate (i.e 0.2 becomes 0.2000000000000001)

@@ -22,7 +22,7 @@ enum CommandType {
 class Parser {
   public:
     Parser() = default;
-    void parse(vector<string> fileStrings);
+    void parse(vector<string> fileStrings, string EOL_Sign);
 
   private:
     //vector<string> getToEOL(vector<string>, int i);

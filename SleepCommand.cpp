@@ -4,13 +4,17 @@
 
 #include "SleepCommand.h"
 void SleepCommand::execute(vector<string> executionCode) {
+    //todo: remove me
+    cout << "parser testing";
     //convert string to int
     int time = stoi(executionCode[0]);
     //get current time before sleep/
     auto start = std::chrono::system_clock::now();
 
     //make program sleep for time value in millisecond.
-    std::this_thread::sleep_for((std::chrono::milliseconds)time);
+
+    //todo: return back to code!!!! shouldn't be a comment.
+    //std::this_thread::sleep_for((std::chrono::milliseconds)time);
 
     //get current time at the end of the sleep
     auto end = std::chrono::system_clock::now();

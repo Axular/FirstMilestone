@@ -10,6 +10,7 @@
 #include <iostream>
 
 void OpenServerCommand::execute(vector<string> params) {
+   cout << "parser testing";
     Expression* portExpression = nullptr;
     int port;
 

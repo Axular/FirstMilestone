@@ -4,9 +4,12 @@
 
 #include "UpdateVarCommand.h"
 #include "VariablesSymbolTable.h"
+#include "Expression.h"
+#include "globals.h"
 
 void UpdateVarCommand::execute(vector<string> executionCode) {
-
+    //todo: remove me
+    cout << "parser testing";
     /*this function made for cases where var was already defined but now the program wants to update it's
      * value to be something else. value can be double but also can be another variable, examples:
      * heading = 3; //value is double
@@ -17,15 +20,26 @@ void UpdateVarCommand::execute(vector<string> executionCode) {
 
     string name = executionCode[0];
     string assignmentOperator = executionCode[1];
-    string value = executionCode[3];
+    string value = executionCode[2];
 
     //Note: if this current command was called I assume that the first word is a name of
     // variable and second word is the assignment operator "=".
     //(we weren't asked to cover any other cases)
 
     if(assignmentOperator == "=") {
-        VariablesSymbolTable::getInstance().updateVarValue(name, stoi(value)); //todo: remove stoi which is not correct!! change to
-                                                //todo: value.calculate() (shunting yard)
+        Expression* exp = nullptr;
+        double valueAsDouble;
+        try {
+            exp = globalInterpreter->interpret(value);
+            valueAsDouble = exp->calculate();
+            delete exp;
+            //delete globalInterpreter;
+        } catch (const char* e) {
+            if (exp != nullptr) {
+                delete exp;
+            }
+        }
+        VariablesSymbolTable::getInstance().updateVarValue(name, valueAsDouble);
     } else {
         throw "Undefined case, tried to update variable and no '=' operator was detected";
     }

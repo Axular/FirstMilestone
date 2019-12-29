@@ -37,5 +37,9 @@ Var::VarType Var::getType() const {
     return type;
 }
 
+double Var::calculate() {
+    return this->getValue();
+}
+
 
 

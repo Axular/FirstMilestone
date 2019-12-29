@@ -4,7 +4,7 @@
 
 #include "Parser.h"
 
-void Parser::parse(vector<string> fileStrings) {
+void Parser::parse(vector<string> fileStrings, string EOL_Sign) {
     CommandType type = Nothing;
 
     for (int i = 0; i < fileStrings.size(); i++) {
@@ -17,7 +17,7 @@ void Parser::parse(vector<string> fileStrings) {
         if (type == Command) {
             //increment i to look from next word
             i++;
-            while (fileStrings[i] != "EOL") {
+            while (fileStrings[i] != EOL_Sign) {
                 pieceOfCodeToExecute.push_back(fileStrings[i]);
                 i++;
             }
@@ -27,21 +27,20 @@ void Parser::parse(vector<string> fileStrings) {
         } else if (type == Variable) {
             type = CommandType::Variable;
             //(without incrementing of i cause we need all vector in this case)
-            while (fileStrings[i] != "EOL") {
+            while (fileStrings[i] != EOL_Sign) {
                 pieceOfCodeToExecute.push_back(fileStrings[i]);
                 i++;
             }
             //call DefineVarCommand
-            CommandsTable::getInstance()->getCommandsMap()["DefineVarCommand"]->execute(pieceOfCodeToExecute);
-        }else {
+            CommandsTable::getInstance()->getCommandsMap()["updateVarCommand"]->execute(pieceOfCodeToExecute);
+        } else {
             throw "Parser failed";
         };
     }
 }
 
 
-
-CommandType Parser::determineType(string firstWord){
+CommandType Parser::determineType(string firstWord) {
 //    get first word to determine the command:
     auto varsIter = VariablesSymbolTable::getInstance().getVariablesMap().find(firstWord);
     auto commandsIter = CommandsTable::getInstance()->getCommandsMap().find(firstWord);

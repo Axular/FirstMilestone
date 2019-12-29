@@ -13,6 +13,7 @@
 #include "Div.h"
 #include "Variable.h"
 #include "UPlus.h"
+#include "VariablesSymbolTable.h"
 
 void Interpreter::setVariables(string str) {
     //check string validation
@@ -130,16 +131,29 @@ void Interpreter::checkValueValidation(string  str) {
 
 //this function check if variable is in our variables list.
 bool Interpreter::isVariable(string str)    {
-    if (this->variables.empty()) {
+
+    //NOTE: this code was changed to support the new VariablesSymbolTable
+    if(VariablesSymbolTable::getInstance().getVariablesMap().empty()){
         return false;
     }
-    map<string, double>::iterator it;
-    for (it = this->variables.begin(); it != this->variables.end() ; it++) {
-        if(!(str.compare(it->first))) {
-            return true;
-        }
+    auto iterator = VariablesSymbolTable::getInstance().getVariablesMap().find(str);
+    if (iterator == VariablesSymbolTable::getInstance().getVariablesMap().end()) {
+        return false;
+    } else {
+        return true;
     }
-    return false;
+
+
+    //    if (this->variables.empty()) {
+//        return false;
+//    }
+//    map<string, double>::iterator it;
+//    for (it = this->variables.begin(); it != this->variables.end() ; it++) {
+//        if(!(str.compare(it->first))) {
+//            return true;
+//        }
+//    }
+//    return false;
 }
 
 Expression *Interpreter::interpret(string str) {
@@ -350,7 +364,19 @@ Expression *Interpreter::postToExpression(queue<pair<string, int >> q) {
     return expressionStack.top();
 }
 double Interpreter::getVarValue(string str) {
-    if (this->variables.empty()) {
+    //NOTE: this code was changed to support the new VariablesSymbolTable
+    if (VariablesSymbolTable::getInstance().getVariablesMap().empty()) {
+        throw "ERROR: failed to value an expression, variables map is empty";
+    }
+    auto iterator = VariablesSymbolTable::getInstance().getVariablesMap().find(str);
+    if (iterator == VariablesSymbolTable::getInstance().getVariablesMap().end()) {
+        throw "ERROR: failed to value an expression, some variable from expression was not found";
+    } else {
+        return iterator->second.getValue();
+    }
+
+    //OLD CODE OF EX1
+    /*    if (this->variables.empty()) {
         throw "Error - no variables";
     }
     map<string, double>::iterator it;
@@ -360,7 +386,7 @@ double Interpreter::getVarValue(string str) {
         }
     }
     //if w get here we didnt find the variable in the list
-    throw "Variable not found";
+    throw "Variable not found";*/
 }
 void Interpreter::expressionValidation(string str) {
     int openBraceCounter = 0;

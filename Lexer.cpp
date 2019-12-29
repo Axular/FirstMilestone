@@ -130,5 +130,6 @@ void Lexer::equalSplit(string line) {
     myVec.push_back(buffer);
     myVec.push_back("=");
     getline(ss, buffer, '=');
+    buffer.erase(std::remove(buffer.begin(), buffer.end(), ' '),buffer.end());
     myVec.push_back(buffer);
 }

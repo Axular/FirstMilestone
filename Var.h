@@ -7,10 +7,11 @@
 
 #include <iostream>
 #include <limits>
+#include "Expression.h"
 
 using namespace std;
 
-class Var {
+class Var : public Expression {
 
 public:
     enum VarType {
@@ -40,6 +41,8 @@ public:
     void update(double val);
 
     VarType getType() const;
+
+    double calculate() override;
 };
 
 
