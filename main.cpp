@@ -103,3 +103,4 @@ int main(int argc, char *argv[]) {
 
 //====To Check==========
 //why ->calculate of double is not accurate (i.e 0.2 becomes 0.2000000000000001)
+// if command

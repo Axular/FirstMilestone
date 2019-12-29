@@ -39,7 +39,6 @@ void DefineVarCommand::execute(vector<string> executionCode) {
         Expression* exp = nullptr;
         double value;
         try {
-
             exp = globalInterpreter->interpret(valueStr);
             value = exp->calculate();
             delete exp;
@@ -49,13 +48,15 @@ void DefineVarCommand::execute(vector<string> executionCode) {
                 delete exp;
             }
         }
-        newVariable = new Var(name, Var::VarType::RegularVar, value);//todo: value.calculate()
+        newVariable = new Var(name, Var::VarType::RegularVar, value);
     } else {
         cout << "Unexpected type of var: none of these were detected: =, ->, <-";
     }
 
     //add var to symbol table(NOTE: if var already exist, symbolTable will update it's value):
     VariablesSymbolTable::getInstance().insertVariable(newVariable);
+    //updating sim to var map:
+    VariablesSymbolTable::getInstance().simVarMap[sim] = newVariable;
 
 
 }
