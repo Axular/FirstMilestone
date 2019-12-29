@@ -25,8 +25,11 @@ private:
     //todo: here only for testing - move back to be private
     unordered_map<string, Var> variablesMap;
 
-public:
+    static unordered_map<string, Var*> SimVarMapInitial();
 
+public:
+    //todo move private
+    static unordered_map<string, Var*> SimVarMap;
     unordered_map<string,Var> getVariablesMap();
     static VariablesSymbolTable &getInstance();
 
@@ -42,6 +45,11 @@ public:
      void updateVarValue(string name, double value);
 
 };
+
+
+
+
+
 
 
 #endif //FIRSTMILESTONE_VARIABLESSYMBOLTABLE_H

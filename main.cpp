@@ -61,31 +61,31 @@ int main(int argc, char *argv[]) {
    // printer.execute(v);
     //Expression* e = nullptr;
 //
-    Expression* e7 = nullptr;
-    try {
-        // 7
-        globalInterpreter->setVariables("x=1.5;y=8.5");
-        //delete globalInterpreter;
-    } catch (const char* e) {
-        if (e7 != nullptr) {
-            delete e7;
-        }
-        if (globalInterpreter != nullptr) {
-            delete globalInterpreter;
-        }
-        std::cout << e << std::endl;
-    }
-    test* t = new test;
-    t->test1();
+    //Expression* e7 = nullptr;
+    //try {
+    //    // 7
+    //    globalInterpreter->setVariables("x=1.5;y=8.5");
+    //    //delete globalInterpreter;
+    //} catch (const char* e) {
+    //    if (e7 != nullptr) {
+    //        delete e7;
+    //    }
+    //    if (globalInterpreter != nullptr) {
+    //        delete globalInterpreter;
+    //    }
+    //    std::cout << e << std::endl;
+    //}
+    //test* t = new test;
+    //t->test1();
 
-    vector<string> loopVec;
-    loopVec.push_back("x");
-    loopVec.push_back(">");
-    loopVec.push_back("y");
-    loopVec.push_back("{");
-    loopVec.push_back("do nothing.");
-    loopVec.push_back("}");
-    WhileLoopCommand().execute(loopVec);
+    //vector<string> loopVec;
+    //loopVec.push_back("x");
+    //loopVec.push_back(">");
+    //loopVec.push_back("y");
+    //loopVec.push_back("{");
+    //loopVec.push_back("do nothing.");
+    //loopVec.push_back("}");
+    //WhileLoopCommand().execute(loopVec);
 
 
     //VariablesSymbolTable::getInstance().variablesMap;

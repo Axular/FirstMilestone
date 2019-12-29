@@ -57,6 +57,9 @@ void ConnectCommand::execute(vector<string> v) {
         cout << "Client is now connected to server" << endl;
     }
 
+    thread clientServer(sendData, clientSocket);
+    clientServer.detach();
+
     //if we get here we made a connection
     sleep(1);
     const char h[] = "set controls/flight/rudder -1\r\n";
@@ -75,4 +78,11 @@ void ConnectCommand::execute(vector<string> v) {
 
     throw "0";
     //return 0;
+}
+void ConnectCommand::sendData(int clientSocket) {
+
+    //todo
+    while(keepRun) {
+        cout << "we are in thread"<< endl;
+    }
 }

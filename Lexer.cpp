@@ -6,6 +6,7 @@
 #include <regex>
 
 
+
 vector<string> Lexer::Lexing() {
     string str;
     //open a file reader pointerloopSplit
@@ -125,6 +126,7 @@ void Lexer::equalSplit(string line) {
     string buffer;
     //split by '='
     getline(ss, buffer, '=');
+    buffer.erase(std::remove(buffer.begin(), buffer.end(), ' '),buffer.end());
     myVec.push_back(buffer);
     myVec.push_back("=");
     getline(ss, buffer, '=');

@@ -22,6 +22,8 @@ class ConnectCommand : public Command {
 
   public:
     void execute(vector<string>);
+  private:
+    static void sendData(int clientSocket);
 };
 
 #endif //FIRSTMILESTONE__CONNECTCOMMAND_H_
