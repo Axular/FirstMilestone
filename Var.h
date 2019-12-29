@@ -6,9 +6,12 @@
 #define FIRSTMILESTONE_VAR_H
 
 #include <iostream>
+#include <limits>
+
 using namespace std;
 
 class Var {
+
 public:
     enum VarType {
         InputVar,   //pointed by another variable from the simulator
@@ -20,17 +23,23 @@ private:
     string name;
     VarType type;
     string address;
-    double value;  //NOTE: value must be double because expression.calculate() returns double
+    double value = numeric_limits<double>::quiet_NaN(); //initialized to Not A Number value
 
 
 public:
-    Var(const string &name, const VarType &type, double value, string addr);
+    Var(const string &name, const VarType &type, string addr);
+
+    Var(const string &name, const VarType &type, double value);
+
     Var() = default;
+
     double getValue() const;
 
-     const string &getName() const  ;
+    const string &getName() const;
 
     void update(double val);
+
+    VarType getType() const;
 };
 
 
