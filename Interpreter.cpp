@@ -372,7 +372,7 @@ double Interpreter::getVarValue(string str) {
     if (iterator == VariablesSymbolTable::getInstance().getVariablesMap().end()) {
         throw "ERROR: failed to value an expression, some variable from expression was not found";
     } else {
-        return iterator->second.getValue();
+        return iterator->second->getValue();
     }
 
     //OLD CODE OF EX1

@@ -6,6 +6,7 @@
 #include "OpenServerCommand.h"
 #include "Expression.h"
 #include "globals.h"
+#include "VariablesSymbolTable.h"
 #include <thread>
 #include <iostream>
 
@@ -69,7 +70,7 @@ void OpenServerCommand::execute(vector<string> params) {
     int client_socket = accept(socketfd, (struct sockaddr *)&address,
                                (socklen_t*)&addrlen);
 
-    //cout << "Connected";
+    cout << "server is now Connected" << endl;
 
     if (client_socket == -1) {
         std::cerr<<"Error accepting client"<<std::endl;
@@ -79,32 +80,51 @@ void OpenServerCommand::execute(vector<string> params) {
 
     close(socketfd); //closing the listening socket
 
-    //reading from client
-    char buffer[1024] = {0};
-    int valread = read( client_socket , buffer, 1024);
-    std::cout<<buffer<<std::endl;
-
     thread threadServer(receiveData, client_socket);
     threadServer.detach();
 
-    //writing back to client
-    char *hello = "Hello, I can hear you! \n";
-    send(client_socket , hello , strlen(hello) , 0 );
-    std::cout<<"Hello message sent\n"<<std::endl;
-
-
+    //todo check if no needed and delete
+    //char buffer[1024] = {0};
+    //int valread = read( client_socket , buffer, 1024);
+    //std::cout<<buffer<<std::endl;
+    ////writing back to client
+    //char *hello = "Hello, I can hear you! \n";
+    //send(client_socket , hello , strlen(hello) , 0 );
+    //std::cout<<"Hello message sent\n"<<std::endl;
+//
 }
 
 void OpenServerCommand::receiveData(int client_socket) {
-    //reading from client
+    //initial local variables.
     char buffer[1024] = {0};
-    int valread = read( client_socket , buffer, 1024);
-    std::cout<<buffer<<std::endl;
+    int valread;
+    int index = 0;
+    char* token;
+    Var* tempVar = nullptr;
     while(keepRun) {
-        cout << "we are in thread"<< endl;
+        index = 0;
+        //get data from client.
         valread = read( client_socket , buffer, 1024);
-        std::cout<<buffer<<std::endl;
-        sleep(1);
+        //std::cout<<buffer<<std::endl;
+        token = strtok(buffer , ",");
+        while(token!=NULL) {
+            //cout << token << endl;
+            //check if the Var we get is not nullptr.
+            tempVar = VariablesSymbolTable::getInstance().simVarMap
+            [VariablesSymbolTable::getInstance().indexSimMap[index]];
+            if(tempVar != nullptr) {
+                //check if this input var that should be updated.
+                if(tempVar->getType() == Var::VarType::InputVar) {
+                    //update tempVar value.
+                    tempVar->update(stod(token));
+                    cout << index << " : " << tempVar->getValue() << endl;
+                }
+            }
+            token = strtok(NULL , ",");
+            index += 1;
+        }
+        //todo check if need this
+        sleep(0.5);
     }
 }
 

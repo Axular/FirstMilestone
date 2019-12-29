@@ -13,6 +13,8 @@
 #include <list>
 #include <fstream>
 #include <functional>
+#include <regex>
+
 
 using namespace std;
 

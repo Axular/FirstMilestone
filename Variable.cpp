@@ -22,7 +22,7 @@ double Variable::calculate() {
     //IMPORTANT: this code was changed as a patch to sync variables old class with the new
     //variables symbol table class (made with some more changes in methods like "getVarValue" and
     //"isVariable"
-    return VariablesSymbolTable::getInstance().getVariablesMap()[this->name].getValue();
+    return VariablesSymbolTable::getInstance().getVariablesMap()[this->name]->getValue();
     // return this->value;
 }
 Variable::~Variable() {

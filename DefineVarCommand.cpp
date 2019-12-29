@@ -28,13 +28,13 @@ void DefineVarCommand::execute(vector<string> executionCode) {
 
 
     //this variable is a double which is Not A Number (good for signing a double as an uninitialized double)
-    Var newVariable;
+    Var* newVariable;
 
     //create new var:
     if (type == "->") {
-        newVariable = Var(name, Var::VarType::OutputVar, sim);
+        newVariable = new Var(name, Var::VarType::OutputVar, sim);
     } else if (type == "<-") {
-        newVariable = Var(name, Var::VarType::InputVar, sim);
+        newVariable = new Var(name, Var::VarType::InputVar, sim);
     } else if (type == "=") {
         Expression* exp = nullptr;
         double value;
@@ -49,7 +49,7 @@ void DefineVarCommand::execute(vector<string> executionCode) {
                 delete exp;
             }
         }
-        newVariable = Var(name, Var::VarType::RegularVar, value);//todo: value.calculate()
+        newVariable = new Var(name, Var::VarType::RegularVar, value);//todo: value.calculate()
     } else {
         cout << "Unexpected type of var: none of these were detected: =, ->, <-";
     }

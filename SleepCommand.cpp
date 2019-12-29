@@ -13,8 +13,7 @@ void SleepCommand::execute(vector<string> executionCode) {
 
     //make program sleep for time value in millisecond.
 
-    //todo: return back to code!!!! shouldn't be a comment.
-    //std::this_thread::sleep_for((std::chrono::milliseconds)time);
+    std::this_thread::sleep_for((std::chrono::milliseconds)time);
 
     //get current time at the end of the sleep
     auto end = std::chrono::system_clock::now();

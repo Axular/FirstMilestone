@@ -3,7 +3,6 @@
 //
 
 #include "Lexer.h"
-#include <regex>
 
 
 
@@ -57,7 +56,7 @@ void Lexer::varSplit(string line) {
         int first = tok.find_first_of('"');
         int last = tok.find_last_of('"');
         //getting substring between 2 "
-        tok = tok.substr(first+1,last-first-1);
+        tok = tok.substr(first+2,last-first-2);
         //pop prev token
         myVec.pop_back();
         //push new token , inner string
@@ -126,6 +125,7 @@ void Lexer::equalSplit(string line) {
     string buffer;
     //split by '='
     getline(ss, buffer, '=');
+    //remove whitespaces from string.
     buffer.erase(std::remove(buffer.begin(), buffer.end(), ' '),buffer.end());
     myVec.push_back(buffer);
     myVec.push_back("=");

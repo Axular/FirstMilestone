@@ -4,10 +4,10 @@
 
 #include "Var.h"
 /*Constructor*/
-Var::Var(const string &name, const VarType &type, string addr){
+Var::Var(const string &name, const VarType &type, string s){
     this->name = name;
     this->type = type;
-    this->address = addr;
+    this->sim = s;
 }
 
 Var::Var(const string &name, const VarType &type, double value){
@@ -35,6 +35,9 @@ void Var::update(double val) {
 
 Var::VarType Var::getType() const {
     return type;
+}
+const string &Var::getSim() const {
+    return sim;
 }
 
 double Var::calculate() {

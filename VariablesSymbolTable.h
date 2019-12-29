@@ -23,14 +23,16 @@ private:
     VariablesSymbolTable() = default;
 
     //todo: here only for testing - move back to be private
-    unordered_map<string, Var> variablesMap;
+    unordered_map<string, Var*> variablesMap;
 
-    static unordered_map<string, Var*> SimVarMapInitial();
+    static unordered_map<string, Var*> simVarMapInitial();
+    static unordered_map<int, string> indexSimMapInitial();
 
 public:
     //todo move private
-    static unordered_map<string, Var*> SimVarMap;
-    unordered_map<string,Var> getVariablesMap();
+    static unordered_map<string, Var*> simVarMap;
+    static unordered_map<int, string> indexSimMap;
+    unordered_map<string,Var*> getVariablesMap();
     static VariablesSymbolTable &getInstance();
 
     //by doing "=delete" we make sure we won't get copies of our symbol table accidentally.
@@ -38,9 +40,9 @@ public:
 
     void operator=(VariablesSymbolTable const &) = delete;
 
-    Var getVariable(string varName);
+    Var* getVariable(string varName);
 
-    void insertVariable(Var var);
+    void insertVariable(Var* var);
 
      void updateVarValue(string name, double value);
 
