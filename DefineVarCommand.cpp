@@ -32,11 +32,11 @@ void DefineVarCommand::execute(vector<string> executionCode) {
 
     //create new var:
     if (type == "->") {
-        newVariable = new Var(name, Var::VarType::OutputVar, sim);
+        newVariable = new Var(name, Var::VarType::OutputVar, sim, Var::UpdateFlag::NotUpdated);
         //updating sim to var map:
         VariablesSymbolTable::getInstance().simVarMap[sim] = newVariable;
     } else if (type == "<-") {
-        newVariable = new Var(name, Var::VarType::InputVar, sim);
+        newVariable = new Var(name, Var::VarType::InputVar, sim, Var::UpdateFlag::NoNeedToBeUpdated);
         //updating sim to var map:
         VariablesSymbolTable::getInstance().simVarMap[sim] = newVariable;
     } else if (type == "=") {

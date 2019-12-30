@@ -32,6 +32,7 @@ Var* VariablesSymbolTable::getVariable(string varName) {
         //todo: what should we do if we search a var that not exist?
         std::cout << "ERROR: not found";
     } else {
+        mutex_lock.unlock();
         return iterator->second;
     }
     mutex_lock.unlock();
@@ -50,6 +51,7 @@ void VariablesSymbolTable::insertVariable(Var* var) {
         iterator->second->update(var->getValue());
     }
     mutex_lock.unlock();
+
 }
 
 
@@ -63,6 +65,7 @@ void VariablesSymbolTable::updateVarValue(string name, double value) {
     if (iterator != this->variablesMap.end()) {
         iterator->second->update(value);//todo: add value.calculate() (shunting yard)
     } else {
+        mutex_lock.unlock();
         throw "ERROR: tries to update variable value of var which not exist!";
     }
     mutex_lock.unlock();

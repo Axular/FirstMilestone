@@ -40,12 +40,15 @@ void UpdateVarCommand::execute(vector<string> executionCode) {
             }
         }
         VariablesSymbolTable::getInstance().updateVarValue(name, valueAsDouble);
+        VariablesSymbolTable::getInstance().getVariable(name)->setUpdateCondition(Var::UpdateFlag::NotUpdated);
+
     } else {
         throw "Undefined case, tried to update variable and no '=' operator was detected";
     }
 
 }
 
-void UpdateVarCommand::updateVarValue(string name, double value){
-    VariablesSymbolTable::getInstance().updateVarValue(name,value);
-}
+//todo check if need to be deleted
+//void UpdateVarCommand::updateVarValue(string name, double value){
+//    VariablesSymbolTable::getInstance().updateVarValue(name,value);
+//}

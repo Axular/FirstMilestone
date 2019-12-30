@@ -22,48 +22,24 @@ var elevator -> sim("/controls/flight/elevator")
 var alt <- sim("/instrumentation/altimeter/indicated-altitude-ft")
 var rpm <- sim("/engines/engine/rpm")
 Print("waiting 2 minutes for gui")
-Sleep(10000)
+Sleep(60000)
 Print("let's start")
 warp = 32000
-Print("warp:")
-Print(warp)
 Sleep(1000)
 magnetos = 3
-Print("magnetos:")
-Print(magnetos)
 throttle = 0.2
-Print("throttle:")
-Print(throttle)
 mixture = 0.949
-Print("mixture:")
-Print(mixture)
 masterbat = 1
-Print("masterbat:")
-Print(masterbat)
 masterlat = 1
-Print("masterlat:")
-Print(masterlat)
 masteravionics = 1
-Print("masteravionics:")
-Print(masteravionics)
 brakeparking = 0
-Print("brakeparking:")
-Print(brakeparking)
 primer = 3
-Print("primer:")
-Print(primer)
 starter = 1
-Print("starter:")
-Print(starter)
 autostart = 1
-Print("autostart:")
-Print(autostart)
 Print("engine is warming...")
-Print("rpm:")
 Print(rpm)
 while rpm <= 750 {
-Print("rpm:")
-Print(rpm)
+	Print(rpm)
 }
 Sleep(5000)
 Print("let's fly")
@@ -71,13 +47,9 @@ var h0 = heading
 breaks = 0
 throttle = 1
 while alt < 1000 {
-Print("this is throttle value:")
-Print(throttle)
-Print("this is alt value:")
-Print(alt)
-rudder = (h0 - heading)/80
-aileron = -roll / 70
-elevator = pitch / 50
-Sleep(250)
+	rudder = (h0 - heading)/80
+	aileron = -(roll) / 70
+	elevator = pitch / 50
+	Sleep(250)
 }
-Print("done")
+Print("done"

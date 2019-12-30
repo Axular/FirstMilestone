@@ -111,7 +111,9 @@ void OpenServerCommand::receiveData(int client_socket) {
         token = strtok(dataFromServer , ",");
 
         while(token!=NULL) {
-            //cout << token << endl;
+//            if ( index == 8) {
+//
+//            }
             //check if the Var we get is not nullptr.
             tempVar = VariablesSymbolTable::getInstance().simVarMap
             [VariablesSymbolTable::getInstance().indexSimMap[index]];
@@ -128,7 +130,7 @@ void OpenServerCommand::receiveData(int client_socket) {
         }
         //todo check if need this
         //todo: check other constants
-        //sleep(3);
+        sleep(0.01);
     }
 }
 

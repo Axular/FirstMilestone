@@ -20,10 +20,18 @@ public:
         RegularVar  //only contains value (doesn't point to the simulator or pointed by the simulator)
     };
 
+    enum UpdateFlag {
+      IsUpdated, //that means out var already sent value to the server.
+      NotUpdated, //means we have to send our value to the server.
+      NoNeedToBeUpdated //this mark variables that dont send values to the server.
+    };
+
 private:
     string name;
     VarType type;
     string sim;
+    UpdateFlag updateCondition;
+
   public:
     const string &getSim() const;
   private:
@@ -33,7 +41,7 @@ private:
 
 
 public:
-    Var(const string &name, const VarType &type, string addr);
+    Var(const string &name, const VarType &type, string addr, const UpdateFlag &updateCondition);
 
     Var(const string &name, const VarType &type, double value);
 
@@ -48,6 +56,11 @@ public:
     VarType getType() const;
 
     double calculate() override;
+
+    UpdateFlag getUpdateCondition() const;
+
+    void setUpdateCondition(UpdateFlag update_condition);
+
 };
 
 

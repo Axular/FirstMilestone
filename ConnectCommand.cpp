@@ -60,29 +60,9 @@ void ConnectCommand::execute(vector<string> v) {
     } else {
         cout << "Client is now connected to server" << endl;
     }
-
+    //opening thread to keep the connect to the server , and send data while program is running.
     thread clientServer(sendData, clientSocket);
     clientServer.detach();
-
-    //if we get here we made a connection
-
-
-/*    char buffer[1024] = {0};
-    int valread = read (clientSocket,buffer,1024);
-    cout << buffer << endl;
-
-    close(clientSocket);
-    todo: remove me
-    char h[] = "set controls/flight/rudder -1\r\n";
-
-    int is_sent = send(clientSocket, h , strlen(h), 0);
-    if (is_sent == -1) {
-        cout << "Error sending msg" << endl;
-    } else {
-        cout<< "Hello msg sent to server" <<endl;
-    }
-    throw "0";
-    return 0;*/
 }
 void ConnectCommand::sendData(int clientSocket) {
     //char buffer[1024] = {0};
@@ -92,33 +72,31 @@ void ConnectCommand::sendData(int clientSocket) {
     while(keepRun) {
         for(auto pair : VariablesSymbolTable::getInstance().getVariablesMap()) {
             //check if this var already is not initial
-            if(pair.second->getType() == Var::VarType::OutputVar)
+            if(pair.second->getType() == Var::VarType::OutputVar &&
+            pair.second->getUpdateCondition() == Var::UpdateFlag::NotUpdated)
             //&& !isnan(pair.second->getValue()) //todo: add to if statement if needed
             {
                 //preparing the string for sending
                 sim = "set ";
                 sim.append(pair.second->getSim());
                 sim.append(" ");
-
                 sim.append(to_string(pair.second->getValue()));
                 sim.append("\r\n");
                 char h[sim.length()+1];
-                strcpy(h,sim.c_str());
                 //convert string to char array.
-                //strcpy(buffer, sim.c_str());
-                //cout << buffer << endl;
+                strcpy(h,sim.c_str());
                 //sending the command to the server.
                 int is_sent = send(clientSocket, h , strlen(h), 0);
                 if (is_sent == -1) {
                     cout << "Error sending msg" << endl;
                 } else {
-                    //cout<< pair.first << pair.second->getValue() <<endl;
                 }
+                pair.second->setUpdateCondition(Var::UpdateFlag::IsUpdated);
             }
         }
         //cout << "we are in thread"<< endl;
         //todo check if need this
-        //sleep(3);
+        sleep(0.01);
     }
     close(clientSocket);
 }
