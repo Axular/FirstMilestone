@@ -14,6 +14,7 @@ CommandsTable* CommandsTable::instance = nullptr;
 #include "SleepCommand.h"
 #include "WhileLoopCommand.h"
 #include "UpdateVarCommand.h"
+#include "IfCommand.h"
 
 #include <mutex>
 
@@ -61,6 +62,7 @@ void CommandsTable::fillCommandsTable() {
     instance->commandsMap["Sleep"] = new SleepCommand();
     instance->commandsMap["while"] = new WhileLoopCommand();
     instance->commandsMap["updateVarCommand"] = new UpdateVarCommand();
+    instance->commandsMap["if"] = new IfCommand();
 
 
 }

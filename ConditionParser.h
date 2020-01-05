@@ -6,7 +6,9 @@
 #define FIRSTMILESTONE__CONDITIONPARSER_H_
 
 #include "Command.h"
-
+/*
+ * a condition parser class is responsible for condition classes.
+ */
 enum ScopeFlag {
   ScopeDidntStarted, // our flag mean we didnt started to execute the scope yet.
   ScopeStarted, //our flag means we are executing the scope now.

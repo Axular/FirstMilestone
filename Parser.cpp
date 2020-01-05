@@ -53,15 +53,3 @@ CommandType Parser::determineType(string firstWord) {
     }
 }
 
-
-/*this function return a vector with needed string till EOL sign.
-vector<string> Parser::getToEOL(vector<string> fileStrings, int i) {
-    vector<string> temp;
-    // iterate vector from i index to EOL sign.
-    for(int j = i ; !fileStrings[i].compare("EOL") ; j++) {
-        temp.push_back(fileStrings[j]);
-    }
-
-    return temp;
-}
-#include "VariablesSymbolTable.h"*/

@@ -6,6 +6,9 @@
 #include "PrintCommand.h"
 #include "SleepCommand.h"
 #include "VariablesSymbolTable.h"
+/*
+ * the printCommand class execute function  take care to print an out put msg to the screen.
+ */
 void PrintCommand::execute(vector<string> executionCode) {
     //todo: remove me
     //cout << "parser testing";

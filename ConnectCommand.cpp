@@ -7,7 +7,10 @@
 #include "globals.h"
 #include "Var.h"
 #include "VariablesSymbolTable.h"
-
+/*
+ * The execute function make the connection with the server.
+ * param : vector v with the information we need to make the connection.
+ * */
 void ConnectCommand::execute(vector<string> v) {
     Expression* portExpression = nullptr;
     int port;
@@ -15,7 +18,6 @@ void ConnectCommand::execute(vector<string> v) {
     string portAsString = v[1];
     try {
         portExpression = globalInterpreter->interpret(portAsString);
-        std::cout << "Connect port as client: " << portExpression->calculate() << std::endl;
         port = portExpression->calculate();
         delete portExpression;
         //delete globalInterpreter;
@@ -28,8 +30,6 @@ void ConnectCommand::execute(vector<string> v) {
         }
         std::cout << e << std::endl;
     }
-    //todo delete this
-    std::cout << port << std::endl;
     //create socket
     int clientSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (clientSocket == -1) {
@@ -42,7 +42,6 @@ void ConnectCommand::execute(vector<string> v) {
     int length = ipAsString.length();
     char ip[length+1];
     strcpy(ip, ipAsString.c_str());
-    //fix port to the right type
 
     //we create sockaddr obj to hold sim of server
     sockaddr_in address; //means IP4
@@ -58,23 +57,24 @@ void ConnectCommand::execute(vector<string> v) {
         throw "-2";
         //return  -2;
     } else {
-        cout << "Client is now connected to server" << endl;
+        //cout << "Client is now connected to server" << endl;
     }
     //opening thread to keep the connect to the server , and send data while program is running.
     thread clientServer(sendData, clientSocket);
     clientServer.detach();
 }
+/*
+ * sendData function is responsible to run a background thread and send data to the server.
+ */
 void ConnectCommand::sendData(int clientSocket) {
     //char buffer[1024] = {0};
     string sim;
-
-
+    //loops run while keepRn is true
     while(keepRun) {
         for(auto pair : VariablesSymbolTable::getInstance().getVariablesMap()) {
             //check if this var already is not initial
             if(pair.second->getType() == Var::VarType::OutputVar &&
-            pair.second->getUpdateCondition() == Var::UpdateFlag::NotUpdated)
-            //&& !isnan(pair.second->getValue()) //todo: add to if statement if needed
+                pair.second->getUpdateCondition() == Var::UpdateFlag::NotUpdated)
             {
                 //preparing the string for sending
                 sim = "set ";
@@ -94,8 +94,7 @@ void ConnectCommand::sendData(int clientSocket) {
                 pair.second->setUpdateCondition(Var::UpdateFlag::IsUpdated);
             }
         }
-        //cout << "we are in thread"<< endl;
-        //todo check if need this
+        //make sleep a bit to let other threads run
         sleep(0.01);
     }
     close(clientSocket);

@@ -142,18 +142,6 @@ bool Interpreter::isVariable(string str)    {
     } else {
         return true;
     }
-
-
-    //    if (this->variables.empty()) {
-//        return false;
-//    }
-//    map<string, double>::iterator it;
-//    for (it = this->variables.begin(); it != this->variables.end() ; it++) {
-//        if(!(str.compare(it->first))) {
-//            return true;
-//        }
-//    }
-//    return false;
 }
 
 Expression *Interpreter::interpret(string str) {
@@ -409,13 +397,9 @@ void Interpreter::expressionValidation(string str) {
     if(str[0] == '*' || str[0] == '/') {
         throw "Invalid expression - first character is a binary operator";
     }
-
-    regex reg("(^[-+][_a-zA-Z])");
+    //initialize regex
+    regex reg("");
     smatch matchs;
-
-    if(regex_search(str, matchs, reg)) {
-        throw "Variable need a braces before unary operator";
-    }
 
     reg = ("([(][+\\-*\\/]*[)])");
     if(regex_search(str, matchs, reg)) {

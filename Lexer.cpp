@@ -5,7 +5,9 @@
 #include "Lexer.h"
 
 
-
+/*
+ * Lexing function is iterating over file lines
+ */
 vector<string> Lexer::Lexing() {
     string str;
     //open a file reader pointerloopSplit
@@ -20,17 +22,24 @@ vector<string> Lexer::Lexing() {
     }
     return myVec;
 }
-//lexer constructor
+/*
+ * lexer constructor
+ * the function also insert EOL flag that marks us the end of the line we reader
+ * from  the file.
+ */
 Lexer::Lexer(const string &file_name) : fileName(file_name) {}
 
+/*
+ * this function adding the data into the data struct.
+ */
 void Lexer::addToVec(string line,ifstream &reader) {
+    //regex to find the symbols we need.
     regex reg;
     smatch matchs;
-    string tok;
-    stringstream ss(line);
     if(regex_search(line, matchs, reg = ("var"))) {
         varSplit(line);
-    } else if (regex_search(line, matchs, reg = ("while")) || regex_search(line, matchs, reg = ("if")) ) {
+    } else if (regex_search(line, matchs, reg = ("while")) ||
+        regex_search(line, matchs, reg = ("if")) ) {
         conditionSplit(line, reader);
     }else if (regex_search(line, matchs, reg = ("="))) {
         equalSplit(line);
@@ -40,12 +49,28 @@ void Lexer::addToVec(string line,ifstream &reader) {
     //end of line flag
     myVec.push_back("EOL");
 }
-//this function split var line.
+/*
+ * split a line contain var
+ */
 void Lexer::varSplit(string line) {
     regex reg;
     smatch matchs;
     string tok;
-    stringstream ss(line);
+    //check if we have '=' in string
+    reg = ("=");
+    if(regex_search(line, matchs, reg)) {
+        //first we insert var as this start of string .
+        myVec.push_back("var");
+        //delete "var " from string and handle the rest.
+        std::regex target("var ");
+        std::string replacement = "";
+        //we already inserted var so no need it any more
+        std::string s2 = std::regex_replace(line, target, replacement);
+        //split the string left usually from the form x=y
+        equalSplit(s2);
+        //if we get here we can go back.
+        return;;
+    }
     //splitting string by spaces
     spaceSplit(line);
     //check last token if it sim, to get inner token
@@ -63,7 +88,9 @@ void Lexer::varSplit(string line) {
         myVec.push_back(tok);
     }
 }
-//this function split string by space delimeter.
+/*
+ * this function split string by space delimeter.
+ */
 void Lexer::spaceSplit(string line) {
     string tok;
     stringstream ss(line);
@@ -72,11 +99,17 @@ void Lexer::spaceSplit(string line) {
         myVec.push_back(tok);
     }
 }
-//function to handle loop string
+/*
+ * function to handle loop string part
+ */
 void Lexer::conditionSplit(string line, ifstream & reader) {
     string str;
-    //first we insert first loop line.
+    //first we insert  the condition line.
     spaceSplit(line);
+    //regex needed locals
+    regex reg;
+    smatch matchs;
+    string tok;
     //we keep going on loop line
     while(std::getline(reader, str)) {
         //if this the end of the scope we will add to vector and stop going over the loop
@@ -87,9 +120,12 @@ void Lexer::conditionSplit(string line, ifstream & reader) {
             //delete the tab in the start
             int first = str.find('\t');
             str = str.substr(first+1);
+            stringstream ss(str);
             //check how to split the string , -1 means there is no '=' in the string
             int equal = str.find('=');
-            if(equal != -1) {
+            if(regex_search(str, matchs, reg = ("var"))) {
+                varSplit(str);
+            }else if(equal != -1) {
                 equalSplit(str);
             } else {
                 parametersSplit(str);
@@ -98,7 +134,10 @@ void Lexer::conditionSplit(string line, ifstream & reader) {
         }
     }
 }
-//function to handle function with parameters command
+/*
+ * function to handle function with parameters command
+ * like Print Sleep OpenDataServe...
+ */
 void Lexer::parametersSplit(string str) {
     //getting first part before braces
     int firstBrace = str.find_first_of('(');
@@ -120,6 +159,10 @@ void Lexer::parametersSplit(string str) {
         myVec.push_back(buffer);
     }
 }
+/*
+ * this function take care when we have '=' in out line
+ * and separate it.
+ */
 void Lexer::equalSplit(string line) {
     stringstream ss(line);
     string buffer;

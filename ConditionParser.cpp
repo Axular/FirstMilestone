@@ -4,6 +4,10 @@
 
 #include "ConditionParser.h"
 #include "globals.h"
+/*
+ * This function check if the condition is false or true bases on the values
+ * we get and return the answer.
+ */
 bool ConditionParser::conditionCheck(vector<string> conditionInfo) {
     Expression* e1 = nullptr;
     Expression* e2 = nullptr;
@@ -16,7 +20,7 @@ bool ConditionParser::conditionCheck(vector<string> conditionInfo) {
         //doesn't work with conditionInfo[0]
         string tempCaster0 = conditionInfo[0];
         string tempCaster2 = conditionInfo[2];
-
+        //evaluate each side of condition expression
         e1 = globalInterpreter->interpret(tempCaster0);
         leftValue = e1->calculate();
         e2 = globalInterpreter->interpret(tempCaster2);
@@ -31,7 +35,7 @@ bool ConditionParser::conditionCheck(vector<string> conditionInfo) {
         std::cout << e << std::endl;
         throw "Error with while loop";
     }
-
+    //check for each possible condition
     if(!conditionInfo[1].compare("<")){
         if(leftValue < rightValue) {
             return true;
@@ -63,7 +67,7 @@ bool ConditionParser::conditionCheck(vector<string> conditionInfo) {
             return false;
         }
     }else if(!conditionInfo[1].compare("==")){
-        if(leftValue != rightValue) {
+        if(leftValue == rightValue) {
             return true;
         } else {
             return false;

@@ -17,7 +17,10 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-
+/*
+ * This class is making a connection to the server as client.
+ *
+ * */
 class ConnectCommand : public Command {
 
   public:

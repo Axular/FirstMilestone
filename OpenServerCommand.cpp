@@ -9,15 +9,17 @@
 #include "VariablesSymbolTable.h"
 #include <thread>
 #include <iostream>
-
+/*
+ * The openServerCommand execute function make a listening server and wait to
+ * client connection.
+ */
 void OpenServerCommand::execute(vector<string> params) {
-   //cout << "parser testing";
+    //calculating port
     Expression* portExpression = nullptr;
     int port;
 
     try {
         portExpression = globalInterpreter->interpret(params.front());
-        //std::cout << "Connect port as client: " << portExpression->calculate() << std::endl;
         port = portExpression->calculate();
         delete portExpression;
         //delete globalInterpreter;
@@ -30,8 +32,8 @@ void OpenServerCommand::execute(vector<string> params) {
         }
         std::cout << e << std::endl;
     }
+    // the port parameter have to be const.
     const int PORT = port;
-    std::cout << PORT << std::endl;
     //create socket
     int socketfd = socket(AF_INET, SOCK_STREAM, 0);
     if (socketfd == -1) {
@@ -45,10 +47,10 @@ void OpenServerCommand::execute(vector<string> params) {
     sockaddr_in address; //in means IP4
     address.sin_family = AF_INET;
     address.sin_addr.s_addr = INADDR_ANY; //give me any IP allocated for my machine
-    address.sin_port = htons(PORT);
     //we need to convert our number
     // to a number that the network understands.
-    //close(socketfd); //closing the listening socket
+    address.sin_port = htons(PORT);
+
     //the actual bind command
     if (bind(socketfd, (struct sockaddr *) &address, sizeof(address)) == -1) {
         std::cerr<<"Could not bind the socket to an IP"<<std::endl;
@@ -62,7 +64,7 @@ void OpenServerCommand::execute(vector<string> params) {
         //return -3;
         throw "-3";
     } else{
-        std::cout<<"Server is now listening ..."<<std::endl;
+        //std::cout<<"Server is now listening ..."<<std::endl;
     }
     int addrlen = sizeof(address);
 
@@ -70,7 +72,7 @@ void OpenServerCommand::execute(vector<string> params) {
     int client_socket = accept(socketfd, (struct sockaddr *)&address,
                                (socklen_t*)&addrlen);
 
-    cout << "server is now Connected" << endl;
+    //cout << "server is now Connected" << endl;
 
     if (client_socket == -1) {
         std::cerr<<"Error accepting client"<<std::endl;
@@ -78,23 +80,18 @@ void OpenServerCommand::execute(vector<string> params) {
         throw "-4";
     }
 
-    //todo: may cause a bug(?)
     close(socketfd); //closing the listening socket
-
+    //creating a thread
     thread threadServer(receiveData, client_socket);
     threadServer.detach();
 
-    //todo check if no needed and delete
-    //char buffer[1024] = {0};
-    //int valread = read( client_socket , buffer, 1024);
-    //std::cout<<buffer<<std::endl;
-    ////writing back to client
-    //char *hello = "Hello, I can hear you! \n";
-    //send(client_socket , hello , strlen(hello) , 0 );
-    //std::cout<<"Hello message sent\n"<<std::endl;
-//
+
 }
 
+/*
+ * receive data function run a background thread that gets a data from
+ * the client while keepRun global is true.
+ */
 void OpenServerCommand::receiveData(int client_socket) {
     //initial local variables.
     char dataFromServer[1024] = {0};
@@ -107,14 +104,10 @@ void OpenServerCommand::receiveData(int client_socket) {
         index = 0;
         //get data from client.
         valread = read(client_socket , dataFromServer, 1024);
-        //std::cout<<dataFromServer<<std::endl;
         token = strtok(dataFromServer , ",");
 
         while(token!=NULL) {
-//            if ( index == 8) {
-//
-//            }
-            //check if the Var we get is not nullptr.
+            //get current var need to update.
             tempVar = VariablesSymbolTable::getInstance().simVarMap
             [VariablesSymbolTable::getInstance().indexSimMap[index]];
             if(tempVar != nullptr) {
@@ -122,16 +115,12 @@ void OpenServerCommand::receiveData(int client_socket) {
                 if(tempVar->getType() == Var::VarType::InputVar) {
                     //update tempVar value.
                     tempVar->update(stod(token));
-                    //cout << index << " : " << tempVar->getValue() << endl;
                 }
             }
             token = strtok(NULL , ",");
             index += 1;
         }
-        //todo check if need this
-        //todo: check other constants
+        //sleep for a bit to make other threads run
         sleep(0.01);
     }
 }
-
-
