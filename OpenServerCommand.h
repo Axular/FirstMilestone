@@ -28,8 +28,9 @@ using namespace std;
 class OpenServerCommand : public Command {
 public:
     void execute(vector<string>);
+    virtual ~OpenServerCommand();
 
-private:
+  private:
     static void receiveData(int);
 };
 

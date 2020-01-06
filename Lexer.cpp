@@ -154,7 +154,7 @@ void Lexer::parametersSplit(string str) {
     string buffer;
     //split by ',' if there is none just push one string
     while (getline(ss, buffer, ',')) {
-        if (buffer.find('\"') != -1) {
+        if (buffer.find('\"') != std::string::npos) {
             //getting " places in string
             int first = buffer.find_first_of('"');
             int last = buffer.find_last_of('"');

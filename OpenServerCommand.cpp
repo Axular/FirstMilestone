@@ -96,7 +96,7 @@ void OpenServerCommand::execute(vector<string> params) {
 void OpenServerCommand::receiveData(int client_socket) {
     //initial local variables.
     char dataFromServer[1024] = {0};
-    int valread;
+    //int valread = 0;
     int index = 0;
     char *token;
     Var *tempVar = nullptr;
@@ -104,7 +104,7 @@ void OpenServerCommand::receiveData(int client_socket) {
     while (keepRun) {
         index = 0;
         //get data from client.
-        valread = read(client_socket, dataFromServer, 1024);
+        read(client_socket, dataFromServer, 1024);
         token = strtok(dataFromServer, ",");
 
         while (token != NULL) {
@@ -124,6 +124,9 @@ void OpenServerCommand::receiveData(int client_socket) {
         //sleep for a bit to make other threads run
         sleep(0.01);
     }
+}
+OpenServerCommand::~OpenServerCommand() {
+
 }
 
 

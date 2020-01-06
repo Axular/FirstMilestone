@@ -14,6 +14,7 @@ class Command {
 public:
 //execute gets as an input a vector which contains the execution code as separated words
     virtual void execute(vector<string> executionCode) = 0;
+    virtual ~Command() {};
 };
 
 #endif //FIRSTMILESTONE__COMMAND_H_

@@ -41,7 +41,7 @@ void ConnectCommand::execute(vector<string> v) {
     }
     //convert string to char*
     int length = ipAsString.length();
-    char ip[length + 1];
+    char *ip = new char[length + 1];
     strcpy(ip, ipAsString.c_str());
 
     //we create sockaddr obj to hold sim of server
@@ -83,7 +83,7 @@ void ConnectCommand::sendData(int clientSocket) {
                 sim.append(" ");
                 sim.append(to_string(pair.second->getValue()));
                 sim.append("\r\n");
-                char h[sim.length() + 1];
+                char *h = new char[sim.length() + 1];
                 //convert string to char array.
                 strcpy(h, sim.c_str());
                 //sending the command to the server.
