@@ -33,11 +33,11 @@ and download Flight Gear Simulator
 - Execute the code 
 - The message "Server is now listening ..." should appear
 - Now on the left panel of FG Simulator, please press 'Fly!'
-- Please fasten you seat belt!
+- Please fasten your seat belt!
 - Wait 2 minutes while engines are getting warming
 - Enjoy the view!
 
-## what is all about
+## What is all about
 
 Our project has made during advanced programming course at Bar-Ilan University in order to acquire the necessary features for our integration into the industry, such as:
 
