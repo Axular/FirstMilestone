@@ -7,7 +7,7 @@
 void Parser::parse(vector<string> fileStrings, string EOL_Sign) {
     CommandType type = Nothing;
 
-    for (int i = 0; i < fileStrings.size(); i++) {
+    for (size_t i = 0; i < fileStrings.size(); i++) {
 
         vector<string> pieceOfCodeToExecute;
         string firstWord = fileStrings[i];

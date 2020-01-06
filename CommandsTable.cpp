@@ -40,7 +40,7 @@ CommandsTable::CommandsTable() {}
 Command *CommandsTable::getCommand(string commandName) {
     auto iterator = this->commandsMap.find(commandName);
     if (iterator == this->commandsMap.end()) {
-        cout << "ERROR: command not found in commands map!";
+        throw "ERROR: command not found in commands map!";
     } else {
         return iterator->second;
     }
@@ -64,7 +64,7 @@ void CommandsTable::fillCommandsTable() {
 
 unordered_map<string, Command *> CommandsTable::getCommandsMap() {
     return commandsMap;
-};
+}
 
 //}
 

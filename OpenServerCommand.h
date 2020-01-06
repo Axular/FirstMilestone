@@ -30,7 +30,7 @@ public:
     void execute(vector<string>);
     virtual ~OpenServerCommand();
 
-  private:
+private:
     static void receiveData(int);
 };
 

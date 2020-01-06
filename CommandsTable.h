@@ -22,6 +22,7 @@ private:
 
     unordered_map<string, Command *> commandsMap;
 
+    virtual ~CommandsTable() {}
 public:
 
     Command *getCommand(string commandName);
@@ -29,6 +30,8 @@ public:
     static CommandsTable *getInstance();
 
     unordered_map<string, Command *> getCommandsMap();
+
+
 };
 
 

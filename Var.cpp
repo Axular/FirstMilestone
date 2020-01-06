@@ -5,17 +5,19 @@
 #include "Var.h"
 
 /*Constructor*/
-Var::Var(const string &name, const VarType &type, string s, const UpdateFlag &updateCondition) {
-    this->name = name;
-    this->type = type;
-    this->sim = s;
-    this->updateCondition = updateCondition;
+Var::Var(const string &theName, const VarType &theType, string theSim, const UpdateFlag &theUpdateCondition) {
+    this->name = theName;
+    this->type = theType;
+    this->sim = theSim;
+    this->updateCondition = theUpdateCondition;
+    //defaultive and must be here
+    this->value = 0;
 }
 
-Var::Var(const string &name, const VarType &type, double value) {
-    this->name = name;
-    this->type = type;
-    this->value = value;
+Var::Var(const string &theName, const VarType &theType, double theValue) {
+    this->name = theName;
+    this->type = theType;
+    this->value = theValue;
 }
 
 /*Getters*/
@@ -53,6 +55,11 @@ Var::UpdateFlag Var::getUpdateCondition() const {
 
 void Var::setUpdateCondition(Var::UpdateFlag update_condition) {
     updateCondition = update_condition;
+}
+
+Var::Var() {
+    //defaultive and must be here
+    this->value = 0;
 }
 
 

@@ -36,15 +36,15 @@ public:
     const string &getSim() const;
 
 private:
-    double value = 0;
+    double value;
 
 
 public:
-    Var(const string &name, const VarType &type, string addr, const UpdateFlag &updateCondition);
+    Var(const string &theName, const VarType &theType, string theSim, const UpdateFlag &theUpdateCondition);
 
-    Var(const string &name, const VarType &type, double value);
+    Var(const string &theName, const VarType &theType, double theValue);
 
-    Var() = default;
+    Var();
 
     double getValue() const;
 
