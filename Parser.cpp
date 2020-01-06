@@ -39,14 +39,12 @@ void Parser::parse(vector<string> fileStrings, string EOL_Sign) {
     }
 }
 
-
 CommandType Parser::determineType(string firstWord) {
 //    get first word to determine the command:
-    auto varsIter = VariablesSymbolTable::getInstance().getVariablesMap().find(firstWord);
     auto commandsIter = CommandsTable::getInstance()->getCommandsMap().find(firstWord);
     if (commandsIter != CommandsTable::getInstance()->getCommandsMap().end()) {
         return CommandType::Command;
-    } else if (varsIter != VariablesSymbolTable::getInstance().getVariablesMap().end()) {
+    } else if (VariablesSymbolTable::getInstance().contains(firstWord)) {
         return CommandType::Variable;
     } else {
         return CommandType::Nothing;

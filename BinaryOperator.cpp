@@ -6,6 +6,6 @@
 
 
 BinaryOperator::BinaryOperator(Expression *leftExp, Expression *rightExp) : Expression(), leftExpression(leftExp),
-rightExpression(rightExp) {
+                                                                            rightExpression(rightExp) {
 
 }

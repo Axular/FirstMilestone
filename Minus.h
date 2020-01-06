@@ -8,14 +8,15 @@
 #include "BinaryOperator.h"
 
 //this class making a minus operation between two expressions.
-class Minus : public BinaryOperator{
+class Minus : public BinaryOperator {
 
-  public:
+public:
     Minus(Expression *exp1, Expression *exp2);
+
     double calculate();
+
     virtual ~Minus();
 };
-
 
 
 #endif //EX1__MINUS_H_

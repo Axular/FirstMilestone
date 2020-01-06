@@ -7,6 +7,7 @@
 Plus::Plus(Expression *leftExp, Expression *rightExp) : BinaryOperator(leftExp, rightExp) {
 
 }
+
 double Plus::calculate() {
     return (this->leftExpression->calculate() + this->rightExpression->calculate());
 }

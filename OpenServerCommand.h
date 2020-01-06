@@ -25,10 +25,11 @@
 using namespace std;
 
 
-class OpenServerCommand :public  Command {
-  public:
+class OpenServerCommand : public Command {
+public:
     void execute(vector<string>);
-  private:
+
+private:
     static void receiveData(int);
 };
 

@@ -4,9 +4,12 @@
 
 #ifndef FIRSTMILESTONE__GLOBALS_H_
 #define FIRSTMILESTONE__GLOBALS_H_
+
 #include "Interpreter.h"
-extern Interpreter* globalInterpreter;
+
+extern Interpreter *globalInterpreter;
 extern bool keepRun;
+
 /*
  * this class is made to enable global variables.
  */

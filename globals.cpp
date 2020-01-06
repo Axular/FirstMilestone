@@ -5,5 +5,5 @@
 //this global class used to make global variables.
 #include "globals.h"
 
-Interpreter* globalInterpreter = new Interpreter();
+Interpreter *globalInterpreter = new Interpreter();
 bool keepRun = true;

@@ -28,7 +28,7 @@ void DefineVarCommand::execute(vector<string> executionCode) {
 
 
     //this variable is a double which is Not A Number (good for signing a double as an uninitialized double)
-    Var* newVariable;
+    Var *newVariable;
 
     //create new var:
     if (type == "->") {
@@ -40,14 +40,14 @@ void DefineVarCommand::execute(vector<string> executionCode) {
         //updating sim to var map:
         VariablesSymbolTable::getInstance().simVarMap[sim] = newVariable;
     } else if (type == "=") {
-        Expression* exp = nullptr;
+        Expression *exp = nullptr;
         double value;
         try {
             exp = globalInterpreter->interpret(valueStr);
             value = exp->calculate();
             delete exp;
             //delete globalInterpreter;
-        } catch (const char* e) {
+        } catch (const char *e) {
             if (exp != nullptr) {
                 delete exp;
             }
@@ -59,7 +59,6 @@ void DefineVarCommand::execute(vector<string> executionCode) {
 
     //add var to symbol table(NOTE: if var already exist, symbolTable will update it's value):
     VariablesSymbolTable::getInstance().insertVariable(newVariable);
-
 
 
 }

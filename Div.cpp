@@ -8,6 +8,7 @@
 Div::Div(Expression *leftExp, Expression *rightExp) : BinaryOperator(leftExp, rightExp) {
 
 }
+
 double Div::calculate() {
     //throwing an exception if we divide by zero.
     if (this->rightExpression->calculate() == 0) {
@@ -16,6 +17,7 @@ double Div::calculate() {
 
     return (this->leftExpression->calculate() / this->rightExpression->calculate());
 }
+
 Div::~Div() {
     delete this->leftExpression;
     delete this->rightExpression;

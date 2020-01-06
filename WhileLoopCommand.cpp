@@ -7,8 +7,7 @@
 #include "Parser.h"
 
 void WhileLoopCommand::execute(vector<string> loopCondition) {
-    //todo: remove me
-    //cout << "parser testing";
+
     vector<string> conditionInfo;
     vector<string> scopeInfo;
     int flag = ScopeDidntStarted;

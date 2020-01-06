@@ -8,14 +8,14 @@
 
 std::mutex mutex_lock;
 
-unordered_map<string,Var*> VariablesSymbolTable::simVarMap;
+unordered_map<string, Var *> VariablesSymbolTable::simVarMap;
 unordered_map<int, string> VariablesSymbolTable::indexSimMap;
 
 VariablesSymbolTable &VariablesSymbolTable::getInstance() {
-    if(simVarMap.empty()) {
+    if (simVarMap.empty()) {
         VariablesSymbolTable::simVarMap = simVarMapInitial();
     }
-    if(indexSimMap.empty()) {
+    if (indexSimMap.empty()) {
         VariablesSymbolTable::indexSimMap = indexSimMapInitial();
     }
     static VariablesSymbolTable instance;
@@ -25,7 +25,7 @@ VariablesSymbolTable &VariablesSymbolTable::getInstance() {
 //todo: create mutex for getter and setter
 /*input: var name
  * output: Var object (if exist), otherwise: prints an error*/
-Var* VariablesSymbolTable::getVariable(string varName) {
+Var *VariablesSymbolTable::getVariable(string varName) {
     mutex_lock.lock();
     auto iterator = this->variablesMap.find(varName);
     if (iterator == this->variablesMap.end()) {
@@ -42,16 +42,15 @@ Var* VariablesSymbolTable::getVariable(string varName) {
  * Inserts vars to symbol table
  * If var already exist - updates it's value
  * */
-void VariablesSymbolTable::insertVariable(Var* var) {
+void VariablesSymbolTable::insertVariable(Var *var) {
     mutex_lock.lock();
     auto iterator = this->variablesMap.find(var->getName());
     if (iterator == this->variablesMap.end()) {
-        this->variablesMap.insert(pair<string, Var*>(var->getName(), var));
+        this->variablesMap.insert(pair<string, Var *>(var->getName(), var));
     } else {
         iterator->second->update(var->getValue());
     }
     mutex_lock.unlock();
-
 }
 
 
@@ -63,7 +62,7 @@ void VariablesSymbolTable::updateVarValue(string name, double value) {
     mutex_lock.lock();
     auto iterator = this->variablesMap.find(name);
     if (iterator != this->variablesMap.end()) {
-        iterator->second->update(value);//todo: add value.calculate() (shunting yard)
+        iterator->second->update(value);
     } else {
         mutex_lock.unlock();
         throw "ERROR: tries to update variable value of var which not exist!";
@@ -71,12 +70,13 @@ void VariablesSymbolTable::updateVarValue(string name, double value) {
     mutex_lock.unlock();
 }
 
-unordered_map<string,Var*> VariablesSymbolTable::getVariablesMap() {
+unordered_map<string, Var *> VariablesSymbolTable::getVariablesMap() {
     return variablesMap;
 }
+
 //this method used to initial map between sims and Vars .
-unordered_map<string, Var*> VariablesSymbolTable::simVarMapInitial() {
-    unordered_map<string, Var*> myMap;
+unordered_map<string, Var *> VariablesSymbolTable::simVarMapInitial() {
+    unordered_map<string, Var *> myMap;
     //1
     myMap["instrumentation/airspeed-indicator/indicated-speed-kt"] = nullptr;
     //2
@@ -152,6 +152,7 @@ unordered_map<string, Var*> VariablesSymbolTable::simVarMapInitial() {
 
     return myMap;
 }
+
 //this method used to initial map between index and sims , by XML order.
 unordered_map<int, string> VariablesSymbolTable::indexSimMapInitial() {
     unordered_map<int, string> myMap;
@@ -229,4 +230,19 @@ unordered_map<int, string> VariablesSymbolTable::indexSimMapInitial() {
     myMap[35] = "engines/engine/rpm";
 
     return myMap;
+}
+
+//checks if symbol table map contains name
+bool VariablesSymbolTable::contains(string name) {
+    auto iterator = this->variablesMap.find(name);
+    if (iterator == this->variablesMap.end()) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+//returns true if the variablesMap is empty
+bool VariablesSymbolTable::isEmpty() {
+    return variablesMap.empty();
 }

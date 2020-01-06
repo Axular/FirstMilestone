@@ -20,11 +20,12 @@ enum CommandType {
 };
 
 class Parser {
-  public:
+public:
     Parser() = default;
+
     void parse(vector<string> fileStrings, string EOL_Sign);
 
-  private:
+private:
     //vector<string> getToEOL(vector<string>, int i);
     CommandType determineType(string firstWord);
 };

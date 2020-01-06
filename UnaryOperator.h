@@ -9,14 +9,15 @@
 
 class UnaryOperator : public Expression {
 
-  private:
+private:
 
-  protected:
-    Expression* expression;
+protected:
+    Expression *expression;
 
-  public:
+public:
     virtual double calculate() = 0;
-    UnaryOperator(Expression*);
+
+    UnaryOperator(Expression *);
 
 
 };

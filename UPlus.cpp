@@ -6,10 +6,12 @@
 
 
 //returning the same expression.
-    double UPlus::calculate() {
-        return this->expression->calculate();
+double UPlus::calculate() {
+    return this->expression->calculate();
 }
+
 UPlus::UPlus(Expression *exp) : UnaryOperator(exp) {}
+
 UPlus::~UPlus() {
     delete this->expression;
 }

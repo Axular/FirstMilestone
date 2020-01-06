@@ -5,5 +5,5 @@
 #include <iostream>
 #include "UnaryOperator.h"
 
-UnaryOperator::UnaryOperator(Expression* ex) : Expression(), expression(ex) {
+UnaryOperator::UnaryOperator(Expression *ex) : Expression(), expression(ex) {
 }

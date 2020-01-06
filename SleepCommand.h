@@ -4,15 +4,18 @@
 
 #ifndef FIRSTMILESTONE__SLEEPCOMMAND_H_
 #define FIRSTMILESTONE__SLEEPCOMMAND_H_
+
 #include <string>
 #include <vector>
 #include <thread>
 #include "Command.h"
 
 using namespace std;
-class SleepCommand : public Command{
-  public :
+
+class SleepCommand : public Command {
+public :
     void execute(vector<string>);
+
     void goToSleep(string);
 };
 

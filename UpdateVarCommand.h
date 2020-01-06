@@ -8,7 +8,7 @@
 
 #include "Command.h"
 
-class UpdateVarCommand : public  Command{
+class UpdateVarCommand : public Command {
 
 protected:
     void execute(vector<string> executionCode) override;

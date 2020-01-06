@@ -7,6 +7,7 @@
 Mul::Mul(Expression *leftExp, Expression *rightExp) : BinaryOperator(leftExp, rightExp) {
 
 }
+
 double Mul::calculate() {
     return (this->leftExpression->calculate() * this->rightExpression->calculate());
 }

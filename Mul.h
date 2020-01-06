@@ -8,11 +8,13 @@
 #include "BinaryOperator.h"
 
 //this class making a multiple operation between two expressions.
-class Mul : public  BinaryOperator{
+class Mul : public BinaryOperator {
 
-  public:
+public:
     Mul(Expression *exp1, Expression *exp2);
+
     double calculate();
+
     virtual ~Mul();
 };
 

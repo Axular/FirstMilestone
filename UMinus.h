@@ -6,15 +6,18 @@
 #define EX1__UMINUS_H_
 
 #include "UnaryOperator.h"
-class UMinus : public UnaryOperator {
-  private:
 
-  public:
+class UMinus : public UnaryOperator {
+private:
+
+public:
     UMinus(Expression *exp);
+
     double calculate();
+
     virtual ~UMinus();
 
-  protected:
+protected:
 };
 
 #endif //EX1__UMINUS_H_

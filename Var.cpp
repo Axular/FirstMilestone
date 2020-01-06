@@ -3,22 +3,23 @@
 //
 
 #include "Var.h"
+
 /*Constructor*/
-Var::Var(const string &name, const VarType &type, string s,const UpdateFlag &updateCondition){
+Var::Var(const string &name, const VarType &type, string s, const UpdateFlag &updateCondition) {
     this->name = name;
     this->type = type;
     this->sim = s;
     this->updateCondition = updateCondition;
 }
 
-Var::Var(const string &name, const VarType &type, double value){
+Var::Var(const string &name, const VarType &type, double value) {
     this->name = name;
     this->type = type;
     this->value = value;
 }
 
 /*Getters*/
-const string &Var::getName() const   {
+const string &Var::getName() const {
     return name;
 }
 
@@ -37,6 +38,7 @@ void Var::update(double val) {
 Var::VarType Var::getType() const {
     return type;
 }
+
 const string &Var::getSim() const {
     return sim;
 }
@@ -44,9 +46,11 @@ const string &Var::getSim() const {
 double Var::calculate() {
     return this->getValue();
 }
+
 Var::UpdateFlag Var::getUpdateCondition() const {
     return updateCondition;
 }
+
 void Var::setUpdateCondition(Var::UpdateFlag update_condition) {
     updateCondition = update_condition;
 }

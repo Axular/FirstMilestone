@@ -17,15 +17,17 @@
 #include <bits/stdc++.h>
 
 using namespace std;
+
 /*
  * This class is making a connection to the server as client.
  *
  * */
 class ConnectCommand : public Command {
 
-  public:
+public:
     void execute(vector<string>);
-  private:
+
+private:
     static void sendData(int clientSocket);
 };
 

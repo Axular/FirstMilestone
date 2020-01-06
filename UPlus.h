@@ -6,16 +6,19 @@
 #define EX1__UPLUS_H_
 
 #include "UnaryOperator.h"
+
 class UPlus : public UnaryOperator {
 
-  private:
+private:
 
-  public:
+public:
     UPlus(Expression *exp);
+
     double calculate();
+
     virtual ~UPlus();
 
-  protected:
+protected:
 };
 
 #endif //EX1__UPLUS_H_

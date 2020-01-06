@@ -4,6 +4,7 @@
 
 #include "IfCommand.h"
 #include "Parser.h"
+
 /*
  * the execute function is seperating the incoming vector from condition part and scope part
  * and run the scope if the condition is true.
@@ -14,7 +15,7 @@ void IfCommand::execute(vector<string> ifConditionInfo) {
     int flag = ScopeDidntStarted;
     Parser *p = new Parser();
     //getting in scope strings operations.
-    for(string s : ifConditionInfo) {
+    for (string s : ifConditionInfo) {
         if (!s.compare("{")) {
             flag = ScopeStarted;
             continue;
@@ -31,7 +32,7 @@ void IfCommand::execute(vector<string> ifConditionInfo) {
         }
     }
     //parsing the if scope
-    if(conditionCheck(conditionInfo)) {
+    if (conditionCheck(conditionInfo)) {
         p->parse(scopeInfo, "SEOL");
     }
     //delete allocation

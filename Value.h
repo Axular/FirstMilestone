@@ -6,12 +6,14 @@
 #define EX1__VALUE_H_
 
 #include "Expression.h"
+
 class Value : public Expression {
-  private:
+private:
     double val;
 
-  public:
+public:
     Value(double value);
+
     double calculate();
 };
 

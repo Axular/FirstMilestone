@@ -7,12 +7,13 @@
 #include "globals.h"
 #include "Var.h"
 #include "VariablesSymbolTable.h"
+
 /*
  * The execute function make the connection with the server.
  * param : vector v with the information we need to make the connection.
  * */
 void ConnectCommand::execute(vector<string> v) {
-    Expression* portExpression = nullptr;
+    Expression *portExpression = nullptr;
     int port;
     string ipAsString = v[0];
     string portAsString = v[1];
@@ -21,7 +22,7 @@ void ConnectCommand::execute(vector<string> v) {
         port = portExpression->calculate();
         delete portExpression;
         //delete globalInterpreter;
-    } catch (const char* e) {
+    } catch (const char *e) {
         if (portExpression != nullptr) {
             delete portExpression;
         }
@@ -40,7 +41,7 @@ void ConnectCommand::execute(vector<string> v) {
     }
     //convert string to char*
     int length = ipAsString.length();
-    char ip[length+1];
+    char ip[length + 1];
     strcpy(ip, ipAsString.c_str());
 
     //we create sockaddr obj to hold sim of server
@@ -57,36 +58,36 @@ void ConnectCommand::execute(vector<string> v) {
         throw "-2";
         //return  -2;
     } else {
-        //cout << "Client is now connected to server" << endl;
+        cout << "Client is now connected to server" << endl;
     }
     //opening thread to keep the connect to the server , and send data while program is running.
     thread clientServer(sendData, clientSocket);
     clientServer.detach();
 }
+
 /*
  * sendData function is responsible to run a background thread and send data to the server.
  */
 void ConnectCommand::sendData(int clientSocket) {
     //char buffer[1024] = {0};
     string sim;
-    //loops run while keepRn is true
-    while(keepRun) {
-        for(auto pair : VariablesSymbolTable::getInstance().getVariablesMap()) {
+    //loops run while keepRun is true
+    while (keepRun) {
+        for (auto pair : VariablesSymbolTable::getInstance().getVariablesMap()) {
             //check if this var already is not initial
-            if(pair.second->getType() == Var::VarType::OutputVar &&
-                pair.second->getUpdateCondition() == Var::UpdateFlag::NotUpdated)
-            {
+            if (pair.second->getType() == Var::VarType::OutputVar &&
+                pair.second->getUpdateCondition() == Var::UpdateFlag::NotUpdated) {
                 //preparing the string for sending
                 sim = "set ";
                 sim.append(pair.second->getSim());
                 sim.append(" ");
                 sim.append(to_string(pair.second->getValue()));
                 sim.append("\r\n");
-                char h[sim.length()+1];
+                char h[sim.length() + 1];
                 //convert string to char array.
-                strcpy(h,sim.c_str());
+                strcpy(h, sim.c_str());
                 //sending the command to the server.
-                int is_sent = send(clientSocket, h , strlen(h), 0);
+                int is_sent = send(clientSocket, h, strlen(h), 0);
                 if (is_sent == -1) {
                     cout << "Error sending msg" << endl;
                 } else {

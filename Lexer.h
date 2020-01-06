@@ -4,6 +4,7 @@
 
 #ifndef FIRSTMILESTONE__LEXER_H_
 #define FIRSTMILESTONE__LEXER_H_
+
 #include <stdio.h>
 #include <string>
 #include <vector>
@@ -19,19 +20,27 @@
 using namespace std;
 
 class Lexer {
-  public:
+public:
     Lexer(const string &file_name);
+
     vector<string> Lexing();
+
     vector<string> myVec;
 
 
-  private:
+private:
     string fileName;
-    void addToVec(string, ifstream&);
+
+    void addToVec(string, ifstream &);
+
     void varSplit(string);
+
     void spaceSplit(string);
+
     void conditionSplit(string line, ifstream &reader);
+
     void parametersSplit(string);
+
     void equalSplit(string);
 };
 

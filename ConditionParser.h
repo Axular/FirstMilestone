@@ -6,17 +6,18 @@
 #define FIRSTMILESTONE__CONDITIONPARSER_H_
 
 #include "Command.h"
+
 /*
  * a condition parser class is responsible for condition classes.
  */
 enum ScopeFlag {
-  ScopeDidntStarted, // our flag mean we didnt started to execute the scope yet.
-  ScopeStarted, //our flag means we are executing the scope now.
-  ScopeEnded // our flag means we finish the current scope.
+    ScopeDidntStarted, // our flag mean we didnt started to execute the scope yet.
+    ScopeStarted, //our flag means we are executing the scope now.
+    ScopeEnded // our flag means we finish the current scope.
 };
 
 class ConditionParser : public Command {
-  protected:
+protected:
     bool conditionCheck(vector<string>);
     //int execute(vector<string>);
 };

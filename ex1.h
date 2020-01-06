@@ -4,6 +4,7 @@
 
 #ifndef EX1__EX1_H_
 #define EX1__EX1_H_
+
 #include <iostream>
 #include <string>
 #include "Variable.h"
@@ -16,6 +17,7 @@
 #include "Mul.h"
 #include "Div.h"
 #include "Interpreter.h"
+
 using namespace std;
 
 class ex1 {

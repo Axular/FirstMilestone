@@ -19,29 +19,33 @@
 using namespace std;
 
 
-
 class Interpreter {
 
-  private:
-    map<string,double> variables;
+private:
+    map<string, double> variables;
 
     void variablesValidation(string);
+
     void checkValueValidation(string);
+
     void checkVarValidation(string);
+
     void expressionValidation(string);
 
     double getVarValue(string);
 
     queue<pair<string, int> > inToPost(string);
-    vector<pair<string, int> > toToken(string);
-    Expression* postToExpression(queue<pair<string, int> >);
 
-  public:
-    Expression* interpret(string);
+    vector<pair<string, int> > toToken(string);
+
+    Expression *postToExpression(queue<pair<string, int> >);
+
+public:
+    Expression *interpret(string);
 
     bool isVariable(string);
-    void setVariables(string);
 
+    void setVariables(string);
 
 
 };

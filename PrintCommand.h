@@ -4,13 +4,15 @@
 
 #ifndef FIRSTMILESTONE__PRINTCOMMAND_H_
 #define FIRSTMILESTONE__PRINTCOMMAND_H_
+
 #include <string>
 #include <vector>
 #include "Command.h"
 
 using namespace std;
-class PrintCommand : public Command{
-  public:
+
+class PrintCommand : public Command {
+public:
     void execute(vector<string>);
 
 };

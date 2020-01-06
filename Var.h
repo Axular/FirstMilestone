@@ -21,9 +21,9 @@ public:
     };
 
     enum UpdateFlag {
-      IsUpdated, //that means out var already sent value to the server.
-      NotUpdated, //means we have to send our value to the server.
-      NoNeedToBeUpdated //this mark variables that dont send values to the server.
+        IsUpdated, //that means out var already sent value to the server.
+        NotUpdated, //means we have to send our value to the server.
+        NoNeedToBeUpdated //this mark variables that dont send values to the server.
     };
 
 private:
@@ -32,9 +32,10 @@ private:
     string sim;
     UpdateFlag updateCondition;
 
-  public:
+public:
     const string &getSim() const;
-  private:
+
+private:
     //todo maybe change back to be NaN
     // numeric_limits<double>::quiet_NaN(); //initialized to Not A Number value
     double value = 0;

@@ -9,20 +9,26 @@
 #include "Command.h"
 
 using namespace std;
+
 class CommandsTable {
 
 
 private:
-    static CommandsTable* instance;
+    static CommandsTable *instance;
+
     CommandsTable();
+
     void fillCommandsTable();
-    unordered_map<string, Command*> commandsMap;
+
+    unordered_map<string, Command *> commandsMap;
 
 public:
 
-    Command* getCommand(string commandName);
-    static CommandsTable* getInstance();
-    unordered_map<string, Command*> getCommandsMap();
+    Command *getCommand(string commandName);
+
+    static CommandsTable *getInstance();
+
+    unordered_map<string, Command *> getCommandsMap();
 };
 
 

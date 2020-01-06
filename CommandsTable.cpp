@@ -4,7 +4,7 @@
 
 #include "CommandsTable.h"
 
-CommandsTable* CommandsTable::instance = nullptr;
+CommandsTable *CommandsTable::instance = nullptr;
 
 #include "unordered_map"
 #include "OpenServerCommand.h"
@@ -16,12 +16,9 @@ CommandsTable* CommandsTable::instance = nullptr;
 #include "UpdateVarCommand.h"
 #include "IfCommand.h"
 
-#include <mutex>
-
 using namespace std;
 
 CommandsTable *instance;
-//std::mutex mutex_lock2;
 
 
 //CommandsTable *CommandsTable::getInstance() {
@@ -41,14 +38,12 @@ CommandsTable *CommandsTable::getInstance() {
 CommandsTable::CommandsTable() {}
 
 Command *CommandsTable::getCommand(string commandName) {
-    // mutex_lock2.lock(); //todo: may cause a bug? (not sure if mutex is needed here)
     auto iterator = this->commandsMap.find(commandName);
     if (iterator == this->commandsMap.end()) {
         cout << "ERROR: command not found in commands map!";
     } else {
         return iterator->second;
     }
-    //  mutex_lock2.unlock();
 }
 
 void CommandsTable::fillCommandsTable() {

@@ -17,7 +17,7 @@
 int main(int argc, char *argv[]) {
 
     //Lexing our data.
-    Lexer *l = new Lexer(argv[argc-1]);
+    Lexer *l = new Lexer(argv[argc - 1]);
     //creating new parser.
     Parser *p = new Parser();
     //parsing the data we have from the file.

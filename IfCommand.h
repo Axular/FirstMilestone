@@ -6,8 +6,9 @@
 #define FIRSTMILESTONE__IFCOMMAND_H_
 
 #include "ConditionParser.h"
-class IfCommand : public ConditionParser{
-  public:
+
+class IfCommand : public ConditionParser {
+public:
     void execute(vector<string>);
 };
 

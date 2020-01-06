@@ -8,6 +8,7 @@
 Minus::Minus(Expression *leftExp, Expression *rightExp) : BinaryOperator(leftExp, rightExp) {
 
 }
+
 double Minus::calculate() {
     return (this->leftExpression->calculate() - this->rightExpression->calculate());
 }

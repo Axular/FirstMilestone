@@ -9,12 +9,13 @@
 
 class BinaryOperator : public Expression {
 
-  protected:
+protected:
     Expression *leftExpression;
     Expression *rightExpression;
 
-  public:
+public:
     BinaryOperator(Expression *, Expression *);
+
     virtual double calculate() = 0;
 
 

@@ -8,11 +8,13 @@
 #include "BinaryOperator.h"
 
 //this class making a plus operation between two expressions.
-class Plus : public  BinaryOperator{
+class Plus : public BinaryOperator {
 
-  public:
+public:
     Plus(Expression *exp1, Expression *exp2);
+
     double calculate();
+
     virtual ~Plus();
 };
 
