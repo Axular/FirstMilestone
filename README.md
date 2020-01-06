@@ -39,7 +39,7 @@ and download Flight Gear Simulator
 
 ## what is all about
 
-Our project is made by us during advanced programming course at Bar-Ilan University in order to acquire the necessary features for our integration into the industry, such as:
+Our project has made during advanced programming course at Bar-Ilan University in order to acquire the necessary features for our integration into the industry, such as:
 
 * Code designing
 * Experiment in OOP developing
