@@ -13,12 +13,6 @@ void WhileLoopCommand::execute(vector<string> loopCondition) {
     int flag = ScopeDidntStarted;
     Parser *p = new Parser();
 
-    //find first { index - should me in 4th place
-    //and condition string put in new vec
-    // todo delete this if other loop works fine
-    //for( int i = 0 ; !loopCondition[i].compare("{") ; i++) {
-    //    conditionInfo.push_back(loopCondition[i]);
-    //}
     //getting in scope strings operations.
     for (string s : loopCondition) {
         if (!s.compare("{")) {

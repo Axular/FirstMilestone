@@ -36,8 +36,6 @@ public:
     const string &getSim() const;
 
 private:
-    //todo maybe change back to be NaN
-    // numeric_limits<double>::quiet_NaN(); //initialized to Not A Number value
     double value = 0;
 
 

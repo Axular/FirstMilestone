@@ -47,7 +47,3 @@ void UpdateVarCommand::execute(vector<string> executionCode) {
 
 }
 
-//todo check if need to be deleted
-//void UpdateVarCommand::updateVarValue(string name, double value){
-//    VariablesSymbolTable::getInstance().updateVarValue(name,value);
-//}
